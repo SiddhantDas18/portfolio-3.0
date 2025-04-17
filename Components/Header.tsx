@@ -11,7 +11,7 @@ export default function Navbar() {
         console.log(open)
     }
 
-    return <header className=" sticky top-o z-[999] text-white">
+    return <header className="sticky top-0 backdrop-blur-sm z-[999] text-white">
         <style jsx global>{`
             @import url('https://fonts.googleapis.com/css2?family=Boldonse&display=swap');
         `}</style>
@@ -19,7 +19,7 @@ export default function Navbar() {
             <p>Hire Me</p>
             <ArrowRight className="h-6 w-6 rounded-4xl" />
         </div>
-        <div className="py-2 px-4 rounded-md">
+        <div className="py-3 px-4 rounded-md">
             <div className="flex justify-between">
                 <p className="text-2xl md:text-3xl font-['Boldonse']">Siddhant</p>
 
