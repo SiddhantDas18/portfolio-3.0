@@ -30,7 +30,7 @@ export default function Navbar() {
                 <nav className="hidden md:flex md:justify-center md:items-center md:gap-3">
                     <a href="">Home</a>
                     <a href="">Projects</a>
-                    <button className="btn">Contact</button>
+                    <button className="btn text-black">Contact</button>
                 </nav>
             </div>
 
