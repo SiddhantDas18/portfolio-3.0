@@ -25,8 +25,9 @@ export default function HeroElement() {
                 <div>
 
                     <div className="flex gap-2 items-start justify-end">
-                        <Image src={Xlogo} alt="X logo" width={25} height={25} className="w-[25px] h-[25px]" />
-                        <Image src={LinktreeLogo} alt="Linktree logo" width={25} height={25} className="w-[25px] h-[25px]" />
+                        <a href="https://x.com/99em99" target="blank"><Image src={Xlogo} alt="X logo" width={25} height={25} className="w-[25px] h-[25px]" /></a>
+                        <a href="https://linktr.ee/siddhant05" target="blank"><Image src={LinktreeLogo} alt="Linktree logo" width={25} height={25} className="w-[25px] h-[25px]" /></a>
+                        
                     </div>
 
                     <div className=" pt-5 opacity-60">
