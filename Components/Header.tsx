@@ -19,7 +19,7 @@ export default function Navbar() {
             <p>Hire Me</p>
             <ArrowRight className="h-6 w-6 rounded-4xl" />
         </div>
-        <div className="py-3 px-4 rounded-md">
+        <div className="py-5 px-6 rounded-md">
             <div className="flex justify-between">
                 <p className="text-2xl md:text-3xl font-['Boldonse']">Siddhant</p>
 

@@ -1,18 +1,25 @@
-
 import Image from "next/image"
 import SiddhantImge from '@/Assets/Siddhant_beta.jpg'
 import Xlogo from '@/Assets/logo-white.png'
 import LinktreeLogo from '@/Assets/linktree-white-icon.png'
-import Link from "next/link"
+import ReactLogo from '@/Assets/reactlogo.png'
+import JavascriptLogo from '@/Assets/JavaScript-logo.png'
+import Typescriptlogo from '@/Assets/ts-logo-128.png'
+import NextJs from "@/Assets/icons8-nextjs-48.png"
+import Docker from "@/Assets/docker-mark-blue.png"
 
 export default function HeroElement() {
-    return <section className="my-10 pt-20 px-10">
+    return <section className="my-10 pt-20 px-10 md:px-40">
         <div className="">
 
 
             <div className="flex justify-between">
                 <div>
-                    <Image src={SiddhantImge} alt="Siddhant" height={120} width={120} className="rounded-2xl" />
+                    <Image 
+                        src={SiddhantImge} 
+                        alt="Siddhant" 
+                        className="rounded-2xl h-[120px] w-[120px] md:h-[160px] md:w-[160px] lg:h-[160px] lg:w-[160px]" 
+                    />
                 </div>
 
                 <div>
@@ -23,7 +30,7 @@ export default function HeroElement() {
                     </div>
 
                     <div className=" pt-5 opacity-60">
-                        <h2>23|M Kolkata India</h2>
+                        <h2>23 | M Kolkata India</h2>
                     </div>
                 </div>
 
@@ -36,6 +43,19 @@ export default function HeroElement() {
                     <h2 className="text-xl font-bold">About</h2>
                     <h2 className="opacity-70">I am a Backend and a Frontend Developer. Trying to make a space of mine</h2>
                     <h2 className="opacity-70">2024 CS graduate</h2>
+                </div>
+
+                <div className="pt-4">
+                <h2 className=" text-xl font-bold ">About</h2>
+                <div className="pt-5 flex gap-4.5 justify-items-center">
+                    <Image src={ReactLogo} alt="ReactLogo" className="h-10 w-10"/>
+                    <Image src={JavascriptLogo} alt="JavascriptLogo" className="h-10 w-10"/>
+                    <Image src={Typescriptlogo} alt="Typescriptlogo" className="h-10 w-10"/>
+                    <Image src={NextJs} alt="NextJs" className="h-10 w-10"/>
+                    <Image src={Docker} alt="NextJs" className="h-10 w-10"/>
+                    
+                </div>
+
                 </div>
             </div>
 
