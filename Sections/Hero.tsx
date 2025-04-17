@@ -1,6 +1,8 @@
 
 export default function HeroElement(){
-    return <div>
-        Hello
-    </div>
+    return <section>
+        <div>
+            
+        </div>
+    </section>
 }
