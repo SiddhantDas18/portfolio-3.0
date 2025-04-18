@@ -1,5 +1,6 @@
 import TypingEffect from "@/Components/TypingEffect";
 import HeroElement from "@/Sections/Hero";
+import Projects from "@/Sections/Projects";
 
 
 export default function Home() {
@@ -7,6 +8,7 @@ export default function Home() {
     <>
     <div>
     <HeroElement/>
+    <Projects/>
     <TypingEffect/>
     
     </div>
