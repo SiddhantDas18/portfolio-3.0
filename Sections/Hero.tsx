@@ -9,7 +9,7 @@ import NextJs from "@/Assets/icons8-nextjs-48.png"
 import Docker from "@/Assets/docker-mark-blue.png"
 
 export default function HeroElement() {
-    return <section className="my-10 pt-20 px-10 md:px-40">
+    return <section className="my-10 pt-20 px-10 md:px-40" id="hero">
         <div className="">
 
 
