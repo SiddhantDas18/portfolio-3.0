@@ -1,7 +1,7 @@
 'use client'
 import Image from "next/image"
 import SiddhantImge from '@/Assets/Siddhant_beta.jpg'
-import {motion} from "motion/react"
+import { motion } from "motion/react"
 import Xlogo from '@/Assets/logo-white.png'
 import LinktreeLogo from '@/Assets/linktree-white-icon.png'
 import ReactLogo from '@/Assets/reactlogo.png'
@@ -11,16 +11,16 @@ import NextJs from "@/Assets/icons8-nextjs-48.png"
 import Docker from "@/Assets/docker-mark-blue.png"
 
 export default function HeroElement() {
-    return <section className="my-10 pt-20 px-10 md:px-40" id="hero">
+    return <section className="my-10 pt-20 px-10 md:px-40 " id="hero">
         <div className="">
 
 
             <div className="flex justify-between">
-                <motion.div whileHover={{scale:1.2}}>
-                    <Image 
-                        src={SiddhantImge} 
-                        alt="Siddhant" 
-                        className="rounded-2xl h-[120px] w-[120px] md:h-[160px] md:w-[160px] lg:h-[160px] lg:w-[160px]" 
+                <motion.div whileHover={{ scale: 1.2 }}>
+                    <Image
+                        src={SiddhantImge}
+                        alt="Siddhant"
+                        className="rounded-2xl h-[120px] w-[120px] md:h-[160px] md:w-[160px] lg:h-[160px] lg:w-[160px]"
                     />
                 </motion.div>
 
@@ -28,12 +28,12 @@ export default function HeroElement() {
 
                     <div className="flex gap-2 items-start justify-end">
 
-                        <motion.div whileHover={{scale:1.5}}>
-                        <a href="https://x.com/99em99" target="blank"><Image src={Xlogo} alt="X logo" width={25} height={25} className="w-[25px] h-[25px]" /></a>
+                        <motion.div whileHover={{ scale: 1.5 }}>
+                            <a href="https://x.com/99em99" target="blank"><Image src={Xlogo} alt="X logo" width={25} height={25} className="w-[25px] h-[25px]" /></a>
                         </motion.div>
-                        
-                        <motion.div whileHover={{scale:1.5}}>
-                        <a href="https://linktr.ee/siddhant05" target="blank"><Image src={LinktreeLogo} alt="Linktree logo" width={25} height={25} className="w-[25px] h-[25px]" /></a>
+
+                        <motion.div whileHover={{ scale: 1.5 }}>
+                            <a href="https://linktr.ee/siddhant05" target="blank"><Image src={LinktreeLogo} alt="Linktree logo" width={25} height={25} className="w-[25px] h-[25px]" /></a>
                         </motion.div>
                     </div>
 
@@ -54,16 +54,65 @@ export default function HeroElement() {
                 </div>
 
                 <div className="pt-4">
-                <h2 className=" text-xl font-bold ">Skills</h2>
-                <div className="pt-5 flex gap-4.5 justify-items-center">
-                    <Image src={ReactLogo} alt="ReactLogo" className="h-10 w-10"/>
-                    <Image src={JavascriptLogo} alt="JavascriptLogo" className="h-10 w-10"/>
-                    <Image src={Typescriptlogo} alt="Typescriptlogo" className="h-10 w-10"/>
-                    <Image src={NextJs} alt="NextJs" className="h-10 w-10"/>
-                    <Image src={Docker} alt="NextJs" className="h-10 w-10"/>
-                    
-                </div>
+                    <h2 className=" text-xl font-bold ">Skills</h2>
+                    <div className="pt-5">
+                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-4 gap-y-8 ">
+                            <motion.div
+                                whileHover={{ scale: 1.2 }}
+                                className="relative h-12 w-full"
+                            >
+                                <div className="absolute top-2 left-1.5 h-12 w-33 bg-yellow-100 text-black shadow-md rounded md:h-12  md:w-50 lg:w-60"></div>
+                                <div className="absolute top-0 left-0 h-12 w-33 bg-[#1e1f2c] text-center text-white shadow-xl rounded flex items-center justify-center font-bold gap-1 md:h-12  md:w-50 md:gap-2 lg:w-60">
+                                    <Image src={JavascriptLogo} alt="JavascriptLogo" className="h-7 w-7 rounded-md" />
+                                    JavaScript
+                                </div>
+                            </motion.div>
 
+                            <motion.div
+                                whileHover={{ scale: 1.2 }}
+                                className="relative h-12 w-full"
+                            >
+                                <div className="absolute top-2 left-1.5 h-12 w-33 bg-blue-300 text-black shadow-md rounded md:h-12 md:w-50 lg:w-60"></div>
+                                <div className="absolute top-0 left-0 h-12 w-33 bg-[#1e1f2c] text-center text-white shadow-xl rounded flex items-center justify-center font-bold gap-1 md:h-12  md:w-50 md:gap-2 lg:w-60">
+                                    <Image src={Typescriptlogo} alt="Typescriptlogo" className="h-7 w-7 rounded-md" />
+                                    TypeScript
+                                </div>
+                            </motion.div>
+
+                            <motion.div
+                                whileHover={{ scale: 1.2 }}
+                                className="relative h-12 w-full"
+                            >
+                                <div className="absolute top-2 left-1.5 h-12 w-33 bg-[#03dbfd] text-black shadow-md rounded md:h-12  md:w-50 lg:w-60 lg:w-60"></div>
+                                <div className="absolute top-0 left-0 h-12 w-33 bg-[#1e1f2c] text-center text-white shadow-xl rounded flex items-center justify-center font-bold gap-1 md:h-12  md:w-50 md:gap-2 lg:w-60 lg:w-60">
+                                    <Image src={ReactLogo} alt="ReactLogo" className="h-7 w-7 rounded-md" />
+                                    React
+                                </div>
+                            </motion.div>
+
+                            <motion.div
+                                whileHover={{ scale: 1.2 }}
+                                className="relative h-12 w-full"
+                            >
+                                <div className="absolute top-2 left-1.5 h-12 w-33 bg-white text-black shadow-md rounded md:h-12  md:w-50 lg:w-60 lg:w-60"></div>
+                                <div className="absolute top-0 left-0 h-12 w-33 bg-[#1e1f2c] text-center text-white shadow-xl rounded flex items-center justify-center font-bold gap-1 md:h-12  md:w-50 md:gap-2 lg:w-60 lg:w-60">
+                                    <Image src={NextJs} alt="NextJs" className="h-7 w-7 rounded-md" />
+                                    Next.js
+                                </div>
+                            </motion.div>
+
+                            <motion.div
+                                whileHover={{ scale: 1.2 }}
+                                className="relative h-12 w-full"
+                            >
+                                <div className="absolute top-2 left-1.5 h-12 w-33 bg-blue-600 text-black shadow-md rounded md:h-12  md:w-50 lg:w-60"></div>
+                                <div className="absolute top-0 left-0 h-12 w-33 bg-[#1e1f2c] text-center text-white shadow-xl rounded flex items-center justify-center font-bold gap-1 md:h-12  md:w-50 md:gap-3 lg:w-60">
+                                    <Image src={Docker} alt="Docker" className="h-7 w-7 rounded-md" />
+                                    Docker
+                                </div>
+                            </motion.div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
