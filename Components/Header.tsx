@@ -2,6 +2,7 @@
 import { useState } from "react"
 import ArrowRight from "@/Assets/ArrowRight"
 import MenuItem from "@/Assets/MenuItem"
+import {motion} from 'motion/react'
 
 export default function Navbar() {
     const [open, setOpen] = useState(false)
@@ -37,9 +38,12 @@ export default function Navbar() {
                     <nav className="hidden md:flex md:justify-center md:items-center md:gap-3">
                         <a href="#hero">Home</a>
                         <a href="#projects">Projects</a>
+                        <motion.div whileHover={{scale:1.3}}>
                         <a href="mailto:siddhant.physics@gmail.com">
-                            <button className="btn text-black">Contact</button>
+                            <button className="btn text-black tracking-tighter">Contact</button>
                         </a>
+                        </motion.div>
+                        
                     </nav>
                 </div>
 
