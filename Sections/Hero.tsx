@@ -1,5 +1,7 @@
+'use client'
 import Image from "next/image"
 import SiddhantImge from '@/Assets/Siddhant_beta.jpg'
+import {motion} from "motion/react"
 import Xlogo from '@/Assets/logo-white.png'
 import LinktreeLogo from '@/Assets/linktree-white-icon.png'
 import ReactLogo from '@/Assets/reactlogo.png'
@@ -14,20 +16,25 @@ export default function HeroElement() {
 
 
             <div className="flex justify-between">
-                <div>
+                <motion.div whileHover={{scale:1.2}}>
                     <Image 
                         src={SiddhantImge} 
                         alt="Siddhant" 
                         className="rounded-2xl h-[120px] w-[120px] md:h-[160px] md:w-[160px] lg:h-[160px] lg:w-[160px]" 
                     />
-                </div>
+                </motion.div>
 
                 <div>
 
                     <div className="flex gap-2 items-start justify-end">
+
+                        <motion.div whileHover={{scale:1.5}}>
                         <a href="https://x.com/99em99" target="blank"><Image src={Xlogo} alt="X logo" width={25} height={25} className="w-[25px] h-[25px]" /></a>
-                        <a href="https://linktr.ee/siddhant05" target="blank"><Image src={LinktreeLogo} alt="Linktree logo" width={25} height={25} className="w-[25px] h-[25px]" /></a>
+                        </motion.div>
                         
+                        <motion.div whileHover={{scale:1.5}}>
+                        <a href="https://linktr.ee/siddhant05" target="blank"><Image src={LinktreeLogo} alt="Linktree logo" width={25} height={25} className="w-[25px] h-[25px]" /></a>
+                        </motion.div>
                     </div>
 
                     <div className=" pt-5 opacity-60">
