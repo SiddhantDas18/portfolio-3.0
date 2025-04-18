@@ -54,7 +54,7 @@ export default function HeroElement() {
                 </div>
 
                 <div className="pt-4">
-                <h2 className=" text-xl font-bold ">About</h2>
+                <h2 className=" text-xl font-bold ">Skills</h2>
                 <div className="pt-5 flex gap-4.5 justify-items-center">
                     <Image src={ReactLogo} alt="ReactLogo" className="h-10 w-10"/>
                     <Image src={JavascriptLogo} alt="JavascriptLogo" className="h-10 w-10"/>
