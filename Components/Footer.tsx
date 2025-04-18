@@ -7,12 +7,12 @@ export default function FooterSection() {
 
     return (
         <div className="pt-20">
-            <div className="flex justify-center items-center text-center">
-                <div className="bg-slate-800 h-50 w-90 rounded-t-3xl flex flex-col items-center">
+            <div className="flex flex-col md:flex-row justify-center items-center text-center">
+                <div className="bg-slate-800 h-50 w-full rounded-t-3xl flex flex-col items-center p-4 md:p-6">
                     <Image 
                         src={Em99Log} 
                         alt='Em99 Logo' 
-                        className='h-20 w-auto pt-5' 
+                        className='h-20 w-auto' 
                         style={{ objectFit: 'contain' }}
                     />
                     <a 
@@ -24,9 +24,9 @@ export default function FooterSection() {
                 </div>
             </div>
 
-            <div className="bg-slate-900 text-white text-center py-4 w-full">
-                <p className="text-sm">© {new Date().getFullYear()} Siddhant Das. All rights reserved.</p>
-                <p className="text-xs">Last updated: {lastUpdatedDate}</p>
+            <div className="bg-slate-900 text-white text-center py-4 w-full flex justify-between items-center px-4 md:px-8">
+                <p className="text-sm md:text-base">© {new Date().getFullYear()} Siddhant Das. All rights reserved.</p>
+                <p className="text-xs md:text-sm">Last updated: {lastUpdatedDate}</p>
             </div>
         </div>
     );
