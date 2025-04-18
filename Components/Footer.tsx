@@ -25,8 +25,8 @@ export default function FooterSection() {
             </div>
 
             <div className="bg-slate-900 text-white text-center py-4 w-full flex justify-between items-center px-4 md:px-8">
-                <p className="text-sm md:text-base">© {new Date().getFullYear()} Siddhant Das. All rights reserved.</p>
-                <p className="text-xs md:text-sm">Last updated: {lastUpdatedDate}</p>
+                <p className=" text-sm md:text-base">© {new Date().getFullYear()} Siddhant Das. All rights reserved.</p>
+                <p className="hidden text-xs md:text-sm md:block">Last updated: {lastUpdatedDate}</p>
             </div>
         </div>
     );
