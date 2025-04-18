@@ -56,13 +56,13 @@ export default function HeroElement() {
                 <div className="pt-4">
                     <h2 className=" text-xl font-bold ">Skills</h2>
                     <div className="pt-5">
-                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-4 gap-y-8 ">
+                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6 gap-y-8 ">
                             <motion.div
                                 whileHover={{ scale: 1.2 }}
                                 className="relative h-12 w-full"
                             >
-                                <div className="absolute top-2 left-1.5 h-12 w-33 bg-yellow-100 text-black shadow-md rounded md:h-12  md:w-50 lg:w-60"></div>
-                                <div className="absolute top-0 left-0 h-12 w-33 bg-[#1e1f2c] text-center text-white shadow-xl rounded flex items-center justify-center font-bold gap-1 md:h-12  md:w-50 md:gap-2 lg:w-60">
+                                <div className="absolute top-2 left-1.5 h-12 w-33 bg-yellow-100 text-black shadow-md rounded md:h-12  md:w-45 2xl:w-60"></div>
+                                <div className="absolute top-0 left-0 h-12 w-33 bg-[#1e1f2c] text-center text-white shadow-xl rounded flex items-center justify-center font-bold gap-1 md:h-12  md:w-45 md:gap-2 2xl:w-60">
                                     <Image src={JavascriptLogo} alt="JavascriptLogo" className="h-7 w-7 rounded-md" />
                                     JavaScript
                                 </div>
@@ -72,8 +72,8 @@ export default function HeroElement() {
                                 whileHover={{ scale: 1.2 }}
                                 className="relative h-12 w-full"
                             >
-                                <div className="absolute top-2 left-1.5 h-12 w-33 bg-blue-300 text-black shadow-md rounded md:h-12 md:w-50 lg:w-60"></div>
-                                <div className="absolute top-0 left-0 h-12 w-33 bg-[#1e1f2c] text-center text-white shadow-xl rounded flex items-center justify-center font-bold gap-1 md:h-12  md:w-50 md:gap-2 lg:w-60">
+                                <div className="absolute top-2 left-1.5 h-12 w-33 bg-blue-300 text-black shadow-md rounded md:h-12 md:w-45 2xl:w-60"></div>
+                                <div className="absolute top-0 left-0 h-12 w-33 bg-[#1e1f2c] text-center text-white shadow-xl rounded flex items-center justify-center font-bold gap-1 md:h-12  md:w-45 md:gap-2 2xl:w-60">
                                     <Image src={Typescriptlogo} alt="Typescriptlogo" className="h-7 w-7 rounded-md" />
                                     TypeScript
                                 </div>
@@ -83,8 +83,8 @@ export default function HeroElement() {
                                 whileHover={{ scale: 1.2 }}
                                 className="relative h-12 w-full"
                             >
-                                <div className="absolute top-2 left-1.5 h-12 w-33 bg-[#03dbfd] text-black shadow-md rounded md:h-12  md:w-50 lg:w-60 lg:w-60"></div>
-                                <div className="absolute top-0 left-0 h-12 w-33 bg-[#1e1f2c] text-center text-white shadow-xl rounded flex items-center justify-center font-bold gap-1 md:h-12  md:w-50 md:gap-2 lg:w-60 lg:w-60">
+                                <div className="absolute top-2 left-1.5 h-12 w-33 bg-[#03dbfd] text-black shadow-md rounded md:h-12  md:w-45 2xl:w-60"></div>
+                                <div className="absolute top-0 left-0 h-12 w-33 bg-[#1e1f2c] text-center text-white shadow-xl rounded flex items-center justify-center font-bold gap-1 md:h-12  md:w-45 md:gap-2  2xl:w-60">
                                     <Image src={ReactLogo} alt="ReactLogo" className="h-7 w-7 rounded-md" />
                                     React
                                 </div>
@@ -94,8 +94,8 @@ export default function HeroElement() {
                                 whileHover={{ scale: 1.2 }}
                                 className="relative h-12 w-full"
                             >
-                                <div className="absolute top-2 left-1.5 h-12 w-33 bg-white text-black shadow-md rounded md:h-12  md:w-50 lg:w-60 lg:w-60"></div>
-                                <div className="absolute top-0 left-0 h-12 w-33 bg-[#1e1f2c] text-center text-white shadow-xl rounded flex items-center justify-center font-bold gap-1 md:h-12  md:w-50 md:gap-2 lg:w-60 lg:w-60">
+                                <div className="absolute top-2 left-1.5 h-12 w-33 bg-white text-black shadow-md rounded md:h-12  md:w-45  2xl:w-60"></div>
+                                <div className="absolute top-0 left-0 h-12 w-33 bg-[#1e1f2c] text-center text-white shadow-xl rounded flex items-center justify-center font-bold gap-1 md:h-12  md:w-45 md:gap-2  2xl:w-60">
                                     <Image src={NextJs} alt="NextJs" className="h-7 w-7 rounded-md" />
                                     Next.js
                                 </div>
@@ -105,8 +105,8 @@ export default function HeroElement() {
                                 whileHover={{ scale: 1.2 }}
                                 className="relative h-12 w-full"
                             >
-                                <div className="absolute top-2 left-1.5 h-12 w-33 bg-blue-600 text-black shadow-md rounded md:h-12  md:w-50 lg:w-60"></div>
-                                <div className="absolute top-0 left-0 h-12 w-33 bg-[#1e1f2c] text-center text-white shadow-xl rounded flex items-center justify-center font-bold gap-1 md:h-12  md:w-50 md:gap-3 lg:w-60">
+                                <div className="absolute top-2 left-1.5 h-12 w-33 bg-blue-600 text-black shadow-md rounded md:h-12  md:w245 2xl:w-60"></div>
+                                <div className="absolute top-0 left-0 h-12 w-33 bg-[#1e1f2c] text-center text-white shadow-xl rounded flex items-center justify-center font-bold gap-1 md:h-12  md:w-45 md:gap-2 2xl:w-60">
                                     <Image src={Docker} alt="Docker" className="h-7 w-7 rounded-md" />
                                     Docker
                                 </div>
