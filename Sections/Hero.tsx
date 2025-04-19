@@ -60,7 +60,7 @@ export default function HeroElement() {
                     <div className="pt-5">
                         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6 gap-y-8">
                             <motion.div
-                                whileHover={{ scale: 1.2 }}
+                                whileHover={{ scale: 1.12 }}
                                 className="relative h-12 w-full"
                             >
                                 <div className="absolute top-2 left-1.5 h-12 w-full bg-yellow-100 text-black shadow-md rounded-md"></div>
@@ -71,7 +71,7 @@ export default function HeroElement() {
                             </motion.div>
 
                             <motion.div
-                                whileHover={{ scale: 1.2 }}
+                                whileHover={{ scale: 1.12 }}
                                 className="relative h-12 w-full"
                             >
                                 <div className="absolute top-2 left-1.5 h-12 w-full bg-blue-300 text-black shadow-md rounded-md"></div>
@@ -82,7 +82,7 @@ export default function HeroElement() {
                             </motion.div>
 
                             <motion.div
-                                whileHover={{ scale: 1.2 }}
+                                whileHover={{ scale: 1.12 }}
                                 className="relative h-12 w-full"
                             >
                                 <div className="absolute top-2 left-1.5 h-12 w-full bg-[#03dbfd] text-black shadow-md rounded-md"></div>
@@ -93,7 +93,7 @@ export default function HeroElement() {
                             </motion.div>
 
                             <motion.div
-                                whileHover={{ scale: 1.2 }}
+                                whileHover={{ scale: 1.12 }}
                                 className="relative h-12 w-full"
                             >
                                 <div className="absolute top-2 left-1.5 h-12 w-full bg-white text-black shadow-md rounded-md"></div>
@@ -104,7 +104,7 @@ export default function HeroElement() {
                             </motion.div>
 
                             <motion.div
-                                whileHover={{ scale: 1.2 }}
+                                whileHover={{ scale: 1.12 }}
                                 className="relative h-12 w-full"
                             >
                                 <div className="absolute top-2 left-1.5 h-12 w-full bg-blue-600 text-black shadow-md rounded-md"></div>
@@ -115,7 +115,7 @@ export default function HeroElement() {
                             </motion.div>
 
                             <motion.div
-                                whileHover={{ scale: 1.2 }}
+                                whileHover={{ scale: 1.12 }}
                                 className="relative h-12 w-full"
                             >
                                 <div className="absolute top-2 left-1.5 h-12 w-full bg-[#17a394] text-black shadow-md rounded-md"></div>
@@ -126,7 +126,7 @@ export default function HeroElement() {
                             </motion.div>
 
                             <motion.div
-                                whileHover={{ scale: 1.2 }}
+                                whileHover={{ scale: 1.12 }}
                                 className="relative h-12 w-full"
                             >
                                 <div className="absolute top-2 left-1.5 h-12 w-full bg-red-300 text-black shadow-md rounded-md"></div>
@@ -137,7 +137,7 @@ export default function HeroElement() {
                             </motion.div>
 
                             <motion.div
-                                whileHover={{ scale: 1.2 }}
+                                whileHover={{ scale: 1.12 }}
                                 className="relative h-12 w-full"
                             >
                                 <div className="absolute top-2 left-1.5 h-12 w-full bg-white text-black shadow-md rounded-md"></div>
