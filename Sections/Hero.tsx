@@ -9,6 +9,9 @@ import JavascriptLogo from '@/Assets/JavaScript-logo.png'
 import Typescriptlogo from '@/Assets/ts-logo-128.png'
 import NextJs from "@/Assets/icons8-nextjs-48.png"
 import Docker from "@/Assets/docker-mark-blue.png"
+import Git from "@/Assets/git.png"
+import Express from "@/Assets/exjs.png"
+import Prisma from "@/Assets/prisma.png"
 
 export default function HeroElement() {
     return <section className="my-10 pt-20 px-10 md:px-40 " id="hero">
@@ -62,7 +65,7 @@ export default function HeroElement() {
                                 className="relative h-12 w-full flex-1"
                             >
                                 <div className="absolute top-2 left-1.5 h-12 w-33 bg-yellow-100 text-black shadow-md rounded-md md:h-12   lg:w-45 2xl:w-60"></div>
-                                <div className="absolute top-0 left-0 h-12 w-33 bg-[#1e1f2c] text-center text-white shadow-xl rounded-md flex items-center justify-center font-bold gap-1 md:h-12  lg:w-45 md:gap-2 2xl:w-60">
+                                <div className="absolute top-0 left-0 h-12 w-33 bg-[#1e1f2c] text-center text-white border-yellow-300/60 border-t border-l  shadow-xl rounded-md flex items-center justify-center font-bold gap-1 md:h-12  lg:w-45 md:gap-2 2xl:w-60">
                                     <Image src={JavascriptLogo} alt="JavascriptLogo" className="h-7 w-7 rounded-md" />
                                     JavaScript
                                 </div>
@@ -73,7 +76,7 @@ export default function HeroElement() {
                                 className="relative h-12 w-full flex-1"
                             >
                                 <div className="absolute top-2 left-1.5 h-12 w-33 bg-blue-300 text-black shadow-md rounded-md md:h-12  lg:w-45 2xl:w-60"></div>
-                                <div className="absolute top-0 left-0 h-12 w-33 bg-[#1e1f2c] text-center text-white shadow-xl rounded-md flex items-center justify-center font-bold gap-1 md:h-12  lg:w-45 md:gap-2  2xl:w-60">
+                                <div className="absolute top-0 left-0 h-12 w-33 bg-[#1e1f2c] text-center text-white border-blue-300/60 border-t border-l shadow-xl rounded-md flex items-center justify-center font-bold gap-1 md:h-12  lg:w-45 md:gap-2  2xl:w-60">
                                     <Image src={Typescriptlogo} alt="Typescriptlogo" className="h-7 w-7 rounded-md" />
                                     TypeScript
                                 </div>
@@ -84,7 +87,7 @@ export default function HeroElement() {
                                 className="relative h-12 w-full flex-1"
                             >
                                 <div className="absolute top-2 left-1.5 h-12 w-33 bg-[#03dbfd] text-black shadow-md rounded-md md:h-12  lg:w-45 2xl:w-60"></div>
-                                <div className="absolute top-0 left-0 h-12 w-33 bg-[#1e1f2c] text-center text-white shadow-xl rounded-md flex items-center justify-center font-bold gap-1 md:h-12  lg:w-45 md:gap-2  2xl:w-60">
+                                <div className="absolute top-0 left-0 h-12 w-33 bg-[#1e1f2c] text-center text-white border-blue-300/60 border-t border-l shadow-xl rounded-md flex items-center justify-center font-bold gap-1 md:h-12  lg:w-45 md:gap-2  2xl:w-60">
                                     <Image src={ReactLogo} alt="ReactLogo" className="h-7 w-7 rounded-md" />
                                     React
                                 </div>
@@ -95,7 +98,7 @@ export default function HeroElement() {
                                 className="relative h-12 w-full flex-1"
                             >
                                 <div className="absolute top-2 left-1.5 h-12 w-33 bg-white text-black shadow-md rounded-md md:h-12  lg:w-45  2xl:w-60"></div>
-                                <div className="absolute top-0 left-0 h-12 w-33 bg-[#1e1f2c] text-center text-white shadow-xl rounded-md flex items-center justify-center font-bold gap-1 md:h-12  lg:w-45 md:gap-2  2xl:w-60">
+                                <div className="absolute top-0 left-0 h-12 w-33 bg-[#1e1f2c] text-center text-white border-white/60 border-t border-l shadow-xl rounded-md flex items-center justify-center font-bold gap-1 md:h-12  lg:w-45 md:gap-2  2xl:w-60">
                                     <Image src={NextJs} alt="NextJs" className="h-7 w-7 rounded-md" />
                                     Next.js
                                 </div>
@@ -106,11 +109,45 @@ export default function HeroElement() {
                                 className="relative h-12 w-full flex-1"
                             >
                                 <div className="absolute top-2 left-1.5 h-12 w-33 bg-blue-600 text-black shadow-md rounded-md md:h-12  lg:w-45 2xl:w-60"></div>
-                                <div className="absolute top-0 left-0 h-12 w-33 bg-[#1e1f2c] text-center text-white shadow-xl rounded-md flex items-center justify-center font-bold gap-1 md:h-12  lg:w-45 md:gap-2 2xl:w-60">
+                                <div className="absolute top-0 left-0 h-12 w-33 bg-[#1e1f2c] text-center text-white border-blue-600/60 border-t border-l shadow-xl rounded-md flex items-center justify-center font-bold gap-1 md:h-12  lg:w-45 md:gap-2 2xl:w-60">
                                     <Image src={Docker} alt="Docker" className="h-7 w-7 rounded-md" />
                                     Docker
                                 </div>
                             </motion.div>
+
+                            <motion.div
+                                whileHover={{ scale: 1.2 }}
+                                className="relative h-12 w-full flex-1"
+                            >
+                                <div className="absolute top-2 left-1.5 h-12 w-33 bg-[#17a394] text-black shadow-md rounded-md md:h-12  lg:w-45 2xl:w-60"></div>
+                                <div className="absolute top-0 left-0 h-12 w-33 bg-[#1e1f2c] text-center text-white border-green-300/30 border-t border-l shadow-xl rounded-md flex items-center justify-center font-bold gap-1 md:h-12  lg:w-45 md:gap-2 2xl:w-60">
+                                    <Image src={Prisma} alt="Docker" className="h-7 w-7 rounded-md" />
+                                    Prisma
+                                </div>
+                            </motion.div>
+
+                            <motion.div
+                                whileHover={{ scale: 1.2 }}
+                                className="relative h-12 w-full flex-1"
+                            >
+                                <div className="absolute top-2 left-1.5 h-12 w-33 bg-red-300 text-black shadow-md rounded-md md:h-12  lg:w-45 2xl:w-60"></div>
+                                <div className="absolute top-0 left-0 h-12 w-33 bg-[#1e1f2c] text-center text-white border-red-300/60 border-t border-l shadow-xl rounded-md flex items-center justify-center font-bold gap-1 md:h-12  lg:w-45 md:gap-2 2xl:w-60">
+                                    <Image src={Git} alt="Docker" className="h-7 w-7 rounded-md" />
+                                    Git
+                                </div>
+                            </motion.div>
+
+                            <motion.div
+                                whileHover={{ scale: 1.2 }}
+                                className="relative h-12 w-full flex-1"
+                            >
+                                <div className="absolute top-2 left-1.5 h-12 w-33 bg-white text-black shadow-md rounded-md md:h-12  lg:w-45 2xl:w-60"></div>
+                                <div className="absolute top-0 left-0 h-12 w-33 bg-[#1e1f2c] text-center text-white border-white/70 border-t border-l shadow-xl rounded-md flex items-center justify-center font-bold gap-1 md:h-12  lg:w-45 md:gap-2 2xl:w-60">
+                                    <Image src={Express} alt="Docker" className="h-7 w-7 rounded-md" />
+                                    Express
+                                </div>
+                            </motion.div>
+
                         </div>
                     </div>
                 </div>
