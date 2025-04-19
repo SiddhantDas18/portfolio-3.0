@@ -12,7 +12,7 @@ export default function Projects() {
                     <p className="pt-2 pl-2 opacity-70">Collaborative code editor made using React, where we can create roomId and join them. And can collaboratively edit our Code</p>
                 </div>
 
-                <div className="pt-2">
+                <div className="pt-2 mt-2">
                     <a href="https://github.com/SiddhantDas18/BasicUI-Rewritting" target="blank" className="text-xl"><h1>Typing UI</h1></a>
                     <p className="pt-2 pl-2 opacity-70">Rich Ui element just like the one below.</p>
                 </div>
