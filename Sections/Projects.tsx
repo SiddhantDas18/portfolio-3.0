@@ -13,6 +13,11 @@ export default function Projects() {
                 </div>
 
                 <div className="pt-2 mt-2">
+                    <a href="https://github.com/SiddhantDas18/solanaWallet" target="blank" className="text-xl"><h1>Solana WEB3 Wallet</h1></a>
+                    <p className="pt-2 pl-2 opacity-70">Solana WEB3 wallet Where you can create your Solana Wallet or can add your Wallet from your very own Mnemonics. Also you can see how much of solana do you have in your wallet.</p>
+                </div>
+
+                <div className="pt-2 mt-2">
                     <a href="https://github.com/SiddhantDas18/BasicUI-Rewritting" target="blank" className="text-xl"><h1>Typing UI</h1></a>
                     <p className="pt-2 pl-2 opacity-70">Rich Ui element just like the one below.</p>
                 </div>
