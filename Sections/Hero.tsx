@@ -12,6 +12,7 @@ import Docker from "@/Assets/docker-mark-blue.png"
 import Git from "@/Assets/git.png"
 import Express from "@/Assets/exjs.png"
 import Prisma from "@/Assets/prisma.png"
+import Github from '@/Assets/github-white-icon.png'
 
 export default function HeroElement() {
     return <section className="my-10 pt-20 px-10 md:px-40" id="hero">
@@ -26,7 +27,7 @@ export default function HeroElement() {
                 </motion.div>
 
                 <div>
-                    <div className="flex gap-2 items-start justify-end">
+                    <div className="flex gap-3 items-start justify-end">
                         <motion.div whileHover={{ scale: 1.5 }}>
                             <a href="https://x.com/99em99" target="blank">
                                 <Image src={Xlogo} alt="X logo" width={25} height={25} className="w-[25px] h-[25px]" />
@@ -36,6 +37,12 @@ export default function HeroElement() {
                         <motion.div whileHover={{ scale: 1.5 }}>
                             <a href="https://linktr.ee/siddhant05" target="blank">
                                 <Image src={LinktreeLogo} alt="Linktree logo" width={25} height={25} className="w-[25px] h-[25px]" />
+                            </a>
+                        </motion.div>
+
+                        <motion.div whileHover={{ scale: 1.5 }}>
+                            <a href="https://github.com/siddhantdas18" target="blank">
+                                <Image src={Github} alt="Github logo" width={25} height={25} className="w-[25px] h-[25px]" />
                             </a>
                         </motion.div>
                     </div>
