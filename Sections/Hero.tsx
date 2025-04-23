@@ -29,7 +29,7 @@ export default function HeroElement() {
                 <div>
                     <div className="flex gap-3 items-start justify-end">
                         <motion.div whileHover={{ scale: 1.5 }}>
-                            <a href="https://x.com/99em99" target="blank">
+                            <a href="https://x.com/siddhantdas99" target="blank">
                                 <Image src={Xlogo} alt="X logo" width={25} height={25} className="w-[25px] h-[25px]" />
                             </a>
                         </motion.div>
