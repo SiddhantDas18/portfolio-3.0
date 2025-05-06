@@ -13,7 +13,7 @@ export default function Projects() {
                 </div>
 
                 <div className="pt-2 mt-2">
-                    <a href="https://solana-wallet-blond.vercel.app/" target="blank" className="text-xl"><h1>Solana WEB3 Wallet (live)</h1></a>
+                    <a href="https://solana-wallet-blond.vercel.app/" target="blank" className="text-xl"><h1>Solana WEB3 Wallet (Live)</h1></a>
                     <p className="pt-2 pl-2 opacity-70">Solana WEB3 wallet Where you can create your Solana Wallet or can add your Wallet from your very own Mnemonics. Also you can see how much of solana do you have in your wallet.</p>
                 </div>
 
@@ -22,6 +22,10 @@ export default function Projects() {
                     <p className="pt-2 pl-2 opacity-70">Rich Ui element just like the one below.</p>
                 </div>
 
+                <div className="pt-2 mt-2">
+                    <a href="https://todo-geogo.vercel.app/" target="blank" className="text-xl"><h1>Todo Application (Live)</h1></a>
+                    <p className="pt-2 pl-2 opacity-70">Built with Prisma and Next.js, featuring complete CRUD operations for managing tasks efficiently.</p>
+                </div>
 
             </div>
         </div>
