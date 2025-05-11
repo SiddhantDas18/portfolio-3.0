@@ -19,7 +19,8 @@ export async function GET() {
       'user-read-playback-state',
       'user-modify-playback-state',
       'user-read-private',
-      'user-read-email'
+      'user-read-email',
+      'user-top-read'
     ].join(' ');
 
     const authUrl = new URL('https://accounts.spotify.com/authorize');
