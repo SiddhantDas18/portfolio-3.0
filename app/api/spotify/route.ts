@@ -17,6 +17,8 @@ if (!client_id || !client_secret || !refresh_token) {
 const basic = Buffer.from(`${client_id}:${client_secret}`).toString('base64');
 const TOKEN_ENDPOINT = 'https://accounts.spotify.com/api/token';
 const NOW_PLAYING_ENDPOINT = 'https://api.spotify.com/v1/me/player/currently-playing';
+const TOP_TRACKS_ENDPOINT = 'https://api.spotify.com/v1/me/top/tracks?limit=10&time_range=short_term';
+const SEARCH_ENDPOINT = 'https://api.spotify.com/v1/search';
 
 async function getAccessToken() {
   try {
@@ -119,9 +121,131 @@ async function getNowPlaying() {
   }
 }
 
-export async function GET() {
+async function getTopTracks() {
   try {
-    console.log('Handling GET request for now playing');
+    console.log('Fetching top tracks...');
+    const { access_token } = await getAccessToken();
+
+    console.log('Making request to Spotify API:', {
+      endpoint: TOP_TRACKS_ENDPOINT,
+      hasAccessToken: !!access_token
+    });
+
+    const response = await fetch(TOP_TRACKS_ENDPOINT, {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
+      next: { revalidate: 3600 }, // Cache for 1 hour
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('Failed to fetch top tracks:', {
+        status: response.status,
+        statusText: response.statusText,
+        error: errorText,
+        headers: Object.fromEntries(response.headers.entries())
+      });
+      throw new Error(`Failed to fetch top tracks: ${response.status} ${response.statusText} - ${errorText}`);
+    }
+
+    const data = await response.json();
+    console.log('Successfully fetched top tracks:', {
+      trackCount: data.items?.length || 0
+    });
+
+    if (!data.items || !Array.isArray(data.items)) {
+      console.error('Invalid response format:', data);
+      throw new Error('Invalid response format from Spotify API');
+    }
+
+    return {
+      tracks: data.items.map((track: any) => ({
+        name: track.name,
+        artists: track.artists.map((artist: any) => artist.name).join(', '),
+        album: {
+          name: track.album.name,
+          images: track.album.images
+        },
+        external_urls: {
+          spotify: track.external_urls.spotify
+        }
+      }))
+    };
+  } catch (error) {
+    console.error('Error fetching top tracks:', error);
+    throw error;
+  }
+}
+
+async function searchTracks(query: string) {
+  try {
+    console.log('Searching tracks:', query);
+    const { access_token } = await getAccessToken();
+
+    const searchUrl = new URL(SEARCH_ENDPOINT);
+    searchUrl.searchParams.append('q', query);
+    searchUrl.searchParams.append('type', 'track');
+    searchUrl.searchParams.append('limit', '10');
+
+    const response = await fetch(searchUrl.toString(), {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
+      next: { revalidate: 3600 }, // Cache for 1 hour
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('Failed to search tracks:', {
+        status: response.status,
+        statusText: response.statusText,
+        error: errorText
+      });
+      throw new Error(`Failed to search tracks: ${response.status} ${response.statusText} - ${errorText}`);
+    }
+
+    const data = await response.json();
+    console.log('Successfully searched tracks');
+
+    return {
+      tracks: data.tracks.items.map((track: any) => ({
+        name: track.name,
+        artists: track.artists.map((artist: any) => artist.name).join(', '),
+        album: {
+          name: track.album.name,
+          images: track.album.images
+        },
+        external_urls: {
+          spotify: track.external_urls.spotify
+        }
+      }))
+    };
+  } catch (error) {
+    console.error('Error searching tracks:', error);
+    throw error;
+  }
+}
+
+export async function GET(request: Request) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const type = searchParams.get('type');
+    const query = searchParams.get('query');
+
+    console.log('Handling GET request for type:', type, 'query:', query);
+
+    if (type === 'top-tracks') {
+      const topTracks = await getTopTracks();
+      return NextResponse.json(topTracks);
+    }
+
+    if (type === 'search' && query) {
+      const searchResults = await searchTracks(query);
+      return NextResponse.json(searchResults);
+    }
+
+    // Default to now playing
     const nowPlaying = await getNowPlaying();
     return NextResponse.json(nowPlaying);
   } catch (error) {
