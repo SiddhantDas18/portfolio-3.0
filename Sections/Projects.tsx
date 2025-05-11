@@ -27,6 +27,11 @@ export default function Projects() {
                     <p className="pt-2 pl-2 opacity-70">Built with Prisma and Next.js, featuring complete CRUD operations for managing tasks efficiently.</p>
                 </div>
 
+                <div className="pt-2 mt-2">
+                    <a href="https://github.com/SiddhantDas18/spotify-integration" target="blank" className="text-xl"><h1>Spotify Integration (Live)</h1></a>
+                    <p className="pt-2 pl-2 opacity-70">Real-time Spotify integration showing currently playing track and top 10 songs, built with Next.js and Spotify Web API.</p>
+                </div>
+
             </div>
         </div>
     </section>
