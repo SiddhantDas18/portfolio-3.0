@@ -9,14 +9,18 @@ import SpotifyArtistTracks from '@/Components/SpotifyArtistTracks';
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center">
-      <div className="w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-[1400px] px-3 sm:px-4 md:px-6 lg:px-8">
         <HeroElement/>
         <Projects/>
         <SpotifyNowPlaying/>
+      </div>
+      
+      {/* TypingEffect outside the container to take full width */}
+      <div className="w-full">
         <TypingEffect/>
       </div>
       
-      <div className="w-full max-w-7xl px-4 sm:px-6 lg:px-8 mt-8">
+      <div className="w-full max-w-[1400px] px-3 sm:px-4 md:px-6 lg:px-8 mt-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <SpotifyArtistTracks />
           <SpotifyRecommendedTracks />
