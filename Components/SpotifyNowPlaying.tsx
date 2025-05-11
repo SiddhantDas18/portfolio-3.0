@@ -23,14 +23,28 @@ interface NowPlaying {
 export default function SpotifyNowPlaying() {
   const [nowPlaying, setNowPlaying] = useState<NowPlaying | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchNowPlaying = async () => {
       try {
+        setIsLoading(true);
         console.log('Fetching now playing data...');
-        const response = await fetch('/api/spotify');
+        
+        const response = await fetch('/api/spotify', {
+          method: 'GET',
+          headers: {
+            'Cache-Control': 'no-cache',
+            'Pragma': 'no-cache'
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
         const data = await response.json();
-        console.log('Now playing response:', data);
+        console.log('Now playing response data:', data);
 
         if (data.error) {
           console.error('Error in now playing data:', data.error);
@@ -39,20 +53,63 @@ export default function SpotifyNowPlaying() {
           return;
         }
 
+        // Log the state before updating
+        console.log('Current state before update:', {
+          nowPlaying,
+          error,
+          isLoading
+        });
+
         setNowPlaying(data);
         setError(null);
+
+        // Log the state after updating
+        console.log('State after update:', {
+          isPlaying: data.isPlaying,
+          hasItem: !!data.item,
+          itemName: data.item?.name,
+          artists: data.item?.artists
+        });
+
       } catch (err) {
         console.error('Failed to fetch Spotify data:', err);
-        setError('Failed to fetch Spotify data');
+        setError(err instanceof Error ? err.message : 'Failed to fetch Spotify data');
         setNowPlaying(null);
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchNowPlaying();
-    const interval = setInterval(fetchNowPlaying, 30000); // Update every 30 seconds
+    const interval = setInterval(fetchNowPlaying, 10000); // Update every 10 seconds
 
     return () => clearInterval(interval);
   }, []);
+
+  // Log render state
+  console.log('Render state:', {
+    isLoading,
+    hasError: !!error,
+    hasNowPlaying: !!nowPlaying,
+    isPlaying: nowPlaying?.isPlaying,
+    hasItem: !!nowPlaying?.item
+  });
+
+  if (isLoading) {
+    return (
+      <section className="py-10 px-10 md:px-40">
+        <div>
+          <p className="bg-grad">Now Playing</p>
+          <div className="pt-5">
+            <div className="flex items-center justify-center p-4 bg-gray-50 dark:bg-gray-800 rounded-lg animate-pulse">
+              <FaSpotify className="w-5 h-5 text-gray-400 mr-2" />
+              <span className="text-gray-400">Loading...</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="py-10 px-10 md:px-40">
@@ -64,12 +121,7 @@ export default function SpotifyNowPlaying() {
               <FaSpotify className="w-5 h-5 text-red-500 mr-2" />
               <span className="text-red-500">{error}</span>
             </div>
-          ) : !nowPlaying ? (
-            <div className="flex items-center justify-center p-4 bg-gray-50 dark:bg-gray-800 rounded-lg animate-pulse">
-              <FaSpotify className="w-5 h-5 text-gray-400 mr-2" />
-              <span className="text-gray-400">Loading...</span>
-            </div>
-          ) : !nowPlaying.isPlaying ? (
+          ) : !nowPlaying?.isPlaying ? (
             <div className="flex items-center justify-center p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
               <FaSpotify className="w-5 h-5 text-gray-400 mr-2" />
               <span className="text-gray-400">Not playing anything right now</span>

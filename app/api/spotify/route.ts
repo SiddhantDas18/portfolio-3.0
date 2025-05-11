@@ -78,15 +78,10 @@ async function getNowPlaying() {
       headers: {
         Authorization: `Bearer ${access_token}`,
       },
-      cache: 'no-store', // Disable caching to always get fresh data
+      cache: 'no-store',
     });
 
-    // Log the full response for debugging
-    console.log('Now playing response:', {
-      status: response.status,
-      statusText: response.statusText,
-      headers: Object.fromEntries(response.headers.entries())
-    });
+    console.log('Now playing response status:', response.status);
 
     if (response.status === 204) {
       console.log('No track currently playing (204 response)');
@@ -107,29 +102,18 @@ async function getNowPlaying() {
     }
 
     const song = await response.json();
-    
-    // Log the full song data for debugging
-    console.log('Now playing data:', {
-      isPlaying: song?.is_playing,
-      trackName: song?.item?.name,
-      artists: song?.item?.artists,
-      progress: song?.progress_ms,
-      timestamp: song?.timestamp
-    });
+    console.log('Raw song data:', song);
 
-    // Check if we have valid song data
     if (!song?.item) {
       console.log('No song data available');
       return NextResponse.json({ isPlaying: false });
     }
 
-    // Check if the track is actually playing
     if (!song.is_playing) {
       console.log('Track is not playing');
       return NextResponse.json({ isPlaying: false });
     }
 
-    // Format the response
     const formattedResponse = {
       isPlaying: true,
       item: {
