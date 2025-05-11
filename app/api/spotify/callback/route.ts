@@ -64,7 +64,7 @@ export async function GET(request: Request) {
     }
 
     console.log('Successfully obtained tokens');
-    // Return the tokens in a user-friendly format
+
     return NextResponse.json({
       message: 'Successfully obtained tokens',
       refresh_token: data.refresh_token,

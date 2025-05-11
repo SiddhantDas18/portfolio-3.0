@@ -93,11 +93,12 @@ async function getNowPlaying() {
 
     const song = await response.json();
     console.log('Successfully fetched now playing:', {
-      isPlaying: !!song?.item,
+      isPlaying: song?.is_playing,
       trackName: song?.item?.name
     });
 
-    if (!song?.item) {
+    // Check if the track is actually playing
+    if (!song?.is_playing || !song?.item) {
       return { isPlaying: false };
     }
 

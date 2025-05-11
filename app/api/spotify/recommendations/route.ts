@@ -50,7 +50,7 @@ async function getNowPlaying() {
       headers: {
         Authorization: `Bearer ${access_token}`,
       },
-      next: { revalidate: 30 }, // Cache for 30 seconds
+      next: { revalidate: 30 }, 
     });
 
     if (response.status === 204) {
@@ -101,7 +101,7 @@ async function searchTracks(query: string) {
       headers: {
         Authorization: `Bearer ${access_token}`,
       },
-      next: { revalidate: 3600 }, // Cache for 1 hour
+      next: { revalidate: 3600 }, 
     });
 
     if (!response.ok) {
