@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 interface NowPlaying {
   isPlaying: boolean;
+  error?: string;
   item?: {
     name: string;
     artists: string;
@@ -26,12 +27,24 @@ export default function SpotifyNowPlaying() {
   useEffect(() => {
     const fetchNowPlaying = async () => {
       try {
+        console.log('Fetching now playing data...');
         const response = await fetch('/api/spotify');
         const data = await response.json();
+        console.log('Now playing response:', data);
+
+        if (data.error) {
+          console.error('Error in now playing data:', data.error);
+          setError(data.error);
+          setNowPlaying(null);
+          return;
+        }
+
         setNowPlaying(data);
         setError(null);
       } catch (err) {
+        console.error('Failed to fetch Spotify data:', err);
         setError('Failed to fetch Spotify data');
+        setNowPlaying(null);
       }
     };
 
@@ -49,7 +62,7 @@ export default function SpotifyNowPlaying() {
           {error ? (
             <div className="flex items-center justify-center p-4 bg-red-50 dark:bg-red-900/20 rounded-lg">
               <FaSpotify className="w-5 h-5 text-red-500 mr-2" />
-              <span className="text-red-500">Error loading Spotify data</span>
+              <span className="text-red-500">{error}</span>
             </div>
           ) : !nowPlaying ? (
             <div className="flex items-center justify-center p-4 bg-gray-50 dark:bg-gray-800 rounded-lg animate-pulse">
