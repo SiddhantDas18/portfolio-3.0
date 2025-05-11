@@ -65,61 +65,39 @@ async function getAccessToken() {
 }
 
 async function getNowPlaying() {
-  try {
-    console.log('Fetching now playing...');
-    const { access_token } = await getAccessToken();
+  const { access_token } = await getAccessToken();
 
-    const response = await fetch(NOW_PLAYING_ENDPOINT, {
-      headers: {
-        Authorization: `Bearer ${access_token}`,
-      },
-      next: { revalidate: 30 }, // Cache for 30 seconds
-    });
+  const response = await fetch(NOW_PLAYING_ENDPOINT, {
+    headers: {
+      Authorization: `Bearer ${access_token}`,
+    },
+  });
 
-    if (response.status === 204) {
-      console.log('No track currently playing');
-      return { isPlaying: false };
-    }
-
-    if (!response.ok) {
-      const error = await response.text();
-      console.error('Failed to fetch now playing:', {
-        status: response.status,
-        statusText: response.statusText,
-        error
-      });
-      throw new Error(`Failed to fetch now playing: ${response.status} ${response.statusText}`);
-    }
-
-    const song = await response.json();
-    console.log('Successfully fetched now playing:', {
-      isPlaying: song?.is_playing,
-      trackName: song?.item?.name
-    });
-
-    // Check if the track is actually playing
-    if (!song?.is_playing || !song?.item) {
-      return { isPlaying: false };
-    }
-
-    return {
-      isPlaying: true,
-      item: {
-        name: song.item.name,
-        artists: song.item.artists.map((artist: any) => artist.name).join(', '),
-        album: {
-          name: song.item.album.name,
-          images: song.item.album.images
-        },
-        external_urls: {
-          spotify: song.item.external_urls.spotify
-        }
-      }
-    };
-  } catch (error) {
-    console.error('Error fetching now playing:', error);
-    throw error;
+  if (response.status === 204 || response.status > 400) {
+    console.log('No active playback or error:', response.status);
+    return NextResponse.json({ isPlaying: false });
   }
+
+  const song = await response.json();
+  console.log('Currently playing:', song);
+  
+  if (!song || !song.item) {
+    return NextResponse.json({ isPlaying: false });
+  }
+  
+  return NextResponse.json({
+    isPlaying: song.is_playing || false,
+    item: {
+      name: song.item.name,
+      artists: song.item.artists,
+      album: {
+        images: song.item.album.images
+      },
+      external_urls: {
+        spotify: song.item.external_urls.spotify
+      }
+    }
+  });
 }
 
 async function getTopTracks() {
@@ -136,7 +114,7 @@ async function getTopTracks() {
       headers: {
         Authorization: `Bearer ${access_token}`,
       },
-      next: { revalidate: 3600 }, // Cache for 1 hour
+      next: { revalidate: 3600 }, 
     });
 
     if (!response.ok) {
@@ -193,7 +171,7 @@ async function searchTracks(query: string) {
       headers: {
         Authorization: `Bearer ${access_token}`,
       },
-      next: { revalidate: 3600 }, // Cache for 1 hour
+      next: { revalidate: 3600 }, 
     });
 
     if (!response.ok) {
@@ -259,4 +237,4 @@ export async function GET(request: Request) {
       { status: 500 }
     );
   }
-} 
+}
