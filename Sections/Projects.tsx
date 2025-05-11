@@ -28,7 +28,7 @@ export default function Projects() {
                 </div>
 
                 <div className="pt-2 mt-2">
-                    <a href="https://github.com/SiddhantDas18/spotify-integration" target="blank" className="text-xl"><h1>Spotify Integration (Live)</h1></a>
+                    <a href="https://github.com/SiddhantDas18/portfolio-3.0/tree/main/app/api/spotify" target="blank" className="text-xl"><h1>Spotify Integration (Live)</h1></a>
                     <p className="pt-2 pl-2 opacity-70">Real-time Spotify integration showing currently playing track and top 10 songs, built with Next.js and Spotify Web API.</p>
                 </div>
 
