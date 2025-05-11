@@ -1,4 +1,4 @@
-import Spotify from "@/Components/Spotify";
+import SpotifyNowPlaying from "@/Components/SpotifyNowPlaying";
 import TypingEffect from "@/Components/TypingEffect";
 import HeroElement from "@/Sections/Hero";
 import Projects from "@/Sections/Projects";
@@ -9,7 +9,7 @@ export default function Home() {
       <div>
         <HeroElement/>
         <Projects/>
-        <Spotify/>
+        <SpotifyNowPlaying/>
         <TypingEffect/>
       </div>
     </>
