@@ -1,10 +1,8 @@
 import { NextResponse } from 'next/server';
-import querystring from 'querystring';
 
 const client_id = process.env.SPOTIFY_CLIENT_ID;
 const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
 const refresh_token = process.env.SPOTIFY_REFRESH_TOKEN;
-const USER_ID = 'frh2oa43i547g16uf9l0q3fxt';
 
 // Check if credentials are available
 if (!client_id || !client_secret || !refresh_token) {
@@ -18,10 +16,13 @@ if (!client_id || !client_secret || !refresh_token) {
 const basic = Buffer.from(`${client_id}:${client_secret}`).toString('base64');
 const TOKEN_ENDPOINT = 'https://accounts.spotify.com/api/token';
 const NOW_PLAYING_ENDPOINT = 'https://api.spotify.com/v1/me/player/currently-playing';
-const USER_PLAYLISTS_ENDPOINT = `https://api.spotify.com/v1/users/${USER_ID}/playlists`;
 const TOP_TRACKS_ENDPOINT = 'https://api.spotify.com/v1/me/top/tracks?limit=10&time_range=short_term';
 
 async function getAccessToken() {
+  if (!refresh_token) {
+    throw new Error('No refresh token available');
+  }
+
   try {
     console.log('Getting access token...');
     const response = await fetch(TOKEN_ENDPOINT, {
@@ -30,10 +31,10 @@ async function getAccessToken() {
         Authorization: `Basic ${basic}`,
         'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: querystring.stringify({
+      body: new URLSearchParams({
         grant_type: 'refresh_token',
         refresh_token,
-      }),
+      }).toString(),
     });
 
     if (!response.ok) {
@@ -103,36 +104,6 @@ async function getNowPlaying() {
   }
 }
 
-async function getUserPlaylists() {
-  try {
-    console.log('Getting user playlists...');
-    const { access_token } = await getAccessToken();
-
-    const response = await fetch(USER_PLAYLISTS_ENDPOINT, {
-      headers: {
-        Authorization: `Bearer ${access_token}`,
-      },
-    });
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error('Error getting playlists:', {
-        status: response.status,
-        statusText: response.statusText,
-        error: errorText
-      });
-      throw new Error(`Failed to fetch playlists: ${response.status} ${response.statusText}`);
-    }
-
-    const data = await response.json();
-    console.log(`Successfully got ${data.items.length} playlists`);
-    return data.items;
-  } catch (error) {
-    console.error('Error in getUserPlaylists:', error);
-    return [];
-  }
-}
-
 async function getTopTracks() {
   try {
     console.log('Getting top tracks...');
@@ -171,11 +142,6 @@ export async function GET(request: Request) {
 
     if (type === 'now-playing') {
       return getNowPlaying();
-    }
-
-    if (type === 'user-playlists') {
-      const playlists = await getUserPlaylists();
-      return NextResponse.json({ playlists });
     }
 
     if (type === 'top-tracks') {
