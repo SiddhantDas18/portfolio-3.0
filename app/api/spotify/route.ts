@@ -22,18 +22,9 @@ const SEARCH_ENDPOINT = 'https://api.spotify.com/v1/search';
 
 async function getAccessToken() {
   try {
-    console.log('Getting access token...');
     const params = new URLSearchParams();
     params.append('grant_type', 'refresh_token');
     params.append('refresh_token', refresh_token as string);
-
-    console.log('Request details:', {
-      endpoint: TOKEN_ENDPOINT,
-      hasClientId: !!client_id,
-      hasClientSecret: !!client_secret,
-      hasRefreshToken: !!refresh_token,
-      refreshTokenLength: refresh_token?.length
-    });
 
     const response = await fetch(TOKEN_ENDPOINT, {
       method: 'POST',
@@ -45,19 +36,10 @@ async function getAccessToken() {
     });
 
     if (!response.ok) {
-      const errorText = await response.text();
-      console.error('Failed to get access token:', {
-        status: response.status,
-        statusText: response.statusText,
-        error: errorText,
-        headers: Object.fromEntries(response.headers.entries())
-      });
-      throw new Error(`Failed to get access token: ${response.status} ${response.statusText} - ${errorText}`);
+      throw new Error(`Failed to get access token: ${response.status} ${response.statusText}`);
     }
 
-    const data = await response.json();
-    console.log('Successfully obtained access token');
-    return data;
+    return response.json();
   } catch (error) {
     console.error('Error getting access token:', error);
     throw error;
@@ -73,6 +55,8 @@ async function getNowPlaying() {
       console.error('No access token available');
       return NextResponse.json({ isPlaying: false, error: 'No access token' });
     }
+
+    console.log('Making request to Spotify API with token:', access_token.substring(0, 10) + '...');
 
     const response = await fetch(NOW_PLAYING_ENDPOINT, {
       headers: {
@@ -247,33 +231,15 @@ async function searchTracks(query: string) {
   }
 }
 
-export async function GET(request: Request) {
+export async function GET() {
   try {
-    const { searchParams } = new URL(request.url);
-    const type = searchParams.get('type');
-    const query = searchParams.get('query');
-
-    console.log('Handling GET request for type:', type, 'query:', query);
-
-    if (type === 'top-tracks') {
-      const topTracks = await getTopTracks();
-      return NextResponse.json(topTracks);
-    }
-
-    if (type === 'search' && query) {
-      const searchResults = await searchTracks(query);
-      return NextResponse.json(searchResults);
-    }
-
-    // Default to now playing
-    const nowPlaying = await getNowPlaying();
-    return NextResponse.json(nowPlaying);
+    return getNowPlaying();
   } catch (error) {
     console.error('Error in API route:', error);
     return NextResponse.json(
       { 
-        error: 'Failed to fetch Spotify data',
-        details: error instanceof Error ? error.message : 'Unknown error'
+        isPlaying: false,
+        error: 'Failed to fetch Spotify data'
       },
       { status: 500 }
     );
