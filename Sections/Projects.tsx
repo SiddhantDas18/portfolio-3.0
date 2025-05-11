@@ -23,7 +23,7 @@ export default function Projects() {
                 </div>
 
                 <div className="pt-2 mt-2">
-                    <a href="https://todo-geogo.vercel.app/" target="blank" className="text-xl"><h1>Todo Application (Live)</h1></a>
+                    <a href="https://github.com/SiddhantDas18/Todo-Geogo" target="blank" className="text-xl"><h1>Todo Application</h1></a>
                     <p className="pt-2 pl-2 opacity-70">Built with Prisma and Next.js, featuring complete CRUD operations for managing tasks efficiently.</p>
                 </div>
 
