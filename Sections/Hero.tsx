@@ -48,7 +48,8 @@ export default function HeroElement() {
                     </div>
 
                     <div className="pt-5 opacity-60">
-                        <h2>23 | M Kolkata India</h2>
+                        <div className="md:hidden"><h2>23 | M Kolkata<br />India</h2></div>
+                        <div className="hidden md:block"><h2>23 | M Kolkata India</h2></div>
                     </div>
                 </div>
             </div>
