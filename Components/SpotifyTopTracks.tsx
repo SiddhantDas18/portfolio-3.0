@@ -64,25 +64,25 @@ export default function SpotifyTopTracks() {
   }
 
   return (
-    <div className="space-y-4">
-      <div className="flex items-center gap-2 text-[#1DB954]">
+    <div className="bg-[#1DB954]/5 rounded-xl p-4 sm:p-6">
+      <div className="flex items-center gap-2 text-[#1DB954] mb-4">
         <FaSpotify className="text-2xl" />
         <h2 className="text-xl font-bold">My Top Tracks</h2>
       </div>
       
-      <div className="grid gap-4">
+      <div className="space-y-3 max-h-[500px] overflow-y-auto pr-2 custom-scrollbar">
         {tracks.map((track, index) => (
           <motion.a
             key={track.name}
             href={track.external_urls.spotify}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-4 p-4 bg-[#1DB954]/5 hover:bg-[#1DB954]/10 rounded-lg transition-colors"
+            className="flex items-center gap-3 p-3 bg-[#1DB954]/5 hover:bg-[#1DB954]/10 rounded-lg transition-colors"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 }}
           >
-            <div className="relative w-12 h-12 flex-shrink-0">
+            <div className="relative w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0">
               {track.album.images[0] && (
                 <img
                   src={track.album.images[0].url}
@@ -91,13 +91,13 @@ export default function SpotifyTopTracks() {
                 />
               )}
               <div className="absolute inset-0 flex items-center justify-center bg-black/50 rounded opacity-0 hover:opacity-100 transition-opacity">
-                <FaSpotify className="text-[#1DB954] text-xl" />
+                <FaSpotify className="text-[#1DB954] text-lg sm:text-xl" />
               </div>
             </div>
             
             <div className="flex-1 min-w-0">
-              <h3 className="font-medium truncate">{track.name}</h3>
-              <p className="text-sm text-gray-500 truncate">{track.artists}</p>
+              <h3 className="font-medium truncate text-sm sm:text-base">{track.name}</h3>
+              <p className="text-xs sm:text-sm text-gray-500 truncate">{track.artists}</p>
               <p className="text-xs text-gray-400 truncate">{track.album.name}</p>
             </div>
           </motion.a>
