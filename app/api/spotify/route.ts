@@ -65,39 +65,96 @@ async function getAccessToken() {
 }
 
 async function getNowPlaying() {
-  const { access_token } = await getAccessToken();
+  try {
+    console.log('Fetching now playing...');
+    const { access_token } = await getAccessToken();
 
-  const response = await fetch(NOW_PLAYING_ENDPOINT, {
-    headers: {
-      Authorization: `Bearer ${access_token}`,
-    },
-  });
-
-  if (response.status === 204 || response.status > 400) {
-    console.log('No active playback or error:', response.status);
-    return NextResponse.json({ isPlaying: false });
-  }
-
-  const song = await response.json();
-  console.log('Currently playing:', song);
-  
-  if (!song || !song.item) {
-    return NextResponse.json({ isPlaying: false });
-  }
-  
-  return NextResponse.json({
-    isPlaying: song.is_playing || false,
-    item: {
-      name: song.item.name,
-      artists: song.item.artists,
-      album: {
-        images: song.item.album.images
-      },
-      external_urls: {
-        spotify: song.item.external_urls.spotify
-      }
+    if (!access_token) {
+      console.error('No access token available');
+      return NextResponse.json({ isPlaying: false, error: 'No access token' });
     }
-  });
+
+    const response = await fetch(NOW_PLAYING_ENDPOINT, {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
+      cache: 'no-store', // Disable caching to always get fresh data
+    });
+
+    // Log the full response for debugging
+    console.log('Now playing response:', {
+      status: response.status,
+      statusText: response.statusText,
+      headers: Object.fromEntries(response.headers.entries())
+    });
+
+    if (response.status === 204) {
+      console.log('No track currently playing (204 response)');
+      return NextResponse.json({ isPlaying: false });
+    }
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('Failed to fetch now playing:', {
+        status: response.status,
+        statusText: response.statusText,
+        error: errorText
+      });
+      return NextResponse.json({ 
+        isPlaying: false, 
+        error: `Failed to fetch now playing: ${response.status} ${response.statusText}` 
+      });
+    }
+
+    const song = await response.json();
+    
+    // Log the full song data for debugging
+    console.log('Now playing data:', {
+      isPlaying: song?.is_playing,
+      trackName: song?.item?.name,
+      artists: song?.item?.artists,
+      progress: song?.progress_ms,
+      timestamp: song?.timestamp
+    });
+
+    // Check if we have valid song data
+    if (!song?.item) {
+      console.log('No song data available');
+      return NextResponse.json({ isPlaying: false });
+    }
+
+    // Check if the track is actually playing
+    if (!song.is_playing) {
+      console.log('Track is not playing');
+      return NextResponse.json({ isPlaying: false });
+    }
+
+    // Format the response
+    const formattedResponse = {
+      isPlaying: true,
+      item: {
+        name: song.item.name,
+        artists: song.item.artists.map((artist: any) => artist.name).join(', '),
+        album: {
+          name: song.item.album.name,
+          images: song.item.album.images
+        },
+        external_urls: {
+          spotify: song.item.external_urls.spotify
+        }
+      }
+    };
+
+    console.log('Sending formatted response:', formattedResponse);
+    return NextResponse.json(formattedResponse);
+
+  } catch (error) {
+    console.error('Error in getNowPlaying:', error);
+    return NextResponse.json({ 
+      isPlaying: false, 
+      error: error instanceof Error ? error.message : 'Unknown error occurred'
+    });
+  }
 }
 
 async function getTopTracks() {
