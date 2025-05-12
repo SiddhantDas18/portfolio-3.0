@@ -48,7 +48,7 @@ async function getAccessToken() {
 
 async function getNowPlaying() {
   try {
-    console.log('Fetching now playing...');
+
     const { access_token } = await getAccessToken();
 
     if (!access_token) {
@@ -56,7 +56,7 @@ async function getNowPlaying() {
       return NextResponse.json({ isPlaying: false, error: 'No access token' });
     }
 
-    console.log('Making request to Spotify API with token:', access_token.substring(0, 10) + '...');
+
 
     const response = await fetch(NOW_PLAYING_ENDPOINT, {
       headers: {
@@ -65,10 +65,10 @@ async function getNowPlaying() {
       cache: 'no-store',
     });
 
-    console.log('Now playing response status:', response.status);
+
 
     if (response.status === 204) {
-      console.log('No track currently playing (204 response)');
+
       return NextResponse.json({ isPlaying: false });
     }
 
@@ -86,15 +86,15 @@ async function getNowPlaying() {
     }
 
     const song = await response.json();
-    console.log('Raw song data:', song);
+
 
     if (!song?.item) {
-      console.log('No song data available');
+
       return NextResponse.json({ isPlaying: false });
     }
 
     if (!song.is_playing) {
-      console.log('Track is not playing');
+
       return NextResponse.json({ isPlaying: false });
     }
 
@@ -113,7 +113,7 @@ async function getNowPlaying() {
       }
     };
 
-    console.log('Sending formatted response:', formattedResponse);
+
     return NextResponse.json(formattedResponse);
 
   } catch (error) {
@@ -127,7 +127,7 @@ async function getNowPlaying() {
 
 async function getTopTracks() {
   try {
-    console.log('Fetching top tracks...');
+
     const { access_token } = await getAccessToken();
 
     if (!access_token) {
@@ -146,7 +146,7 @@ async function getTopTracks() {
     }
 
     const data = await response.json();
-    console.log('Top tracks data:', data);
+
 
     if (!data.items || !Array.isArray(data.items)) {
       throw new Error('Invalid response format from Spotify API');
@@ -179,7 +179,7 @@ async function getTopTracks() {
 
 async function searchTracks(query: string) {
   try {
-    console.log('Searching tracks:', query);
+
     const { access_token } = await getAccessToken();
 
     if (!access_token) {
@@ -203,7 +203,7 @@ async function searchTracks(query: string) {
     }
 
     const data = await response.json();
-    console.log('Search results:', data);
+
 
     return NextResponse.json({
       tracks: data.tracks.items.map((track: any) => ({
@@ -236,7 +236,7 @@ export async function GET(request: Request) {
     const type = searchParams.get('type');
     const query = searchParams.get('query');
 
-    console.log('Handling GET request for type:', type, 'query:', query);
+
 
     if (type === 'top-tracks') {
       return getTopTracks();

@@ -11,7 +11,7 @@ export async function GET(request: Request) {
     const error = searchParams.get('error');
 
     if (error) {
-      console.error('Spotify authorization error:', error);
+
       return NextResponse.json(
         { error: `Authorization failed: ${error}` },
         { status: 400 }
@@ -19,7 +19,7 @@ export async function GET(request: Request) {
     }
 
     if (!code) {
-      console.error('No authorization code provided');
+
       return NextResponse.json(
         { error: 'No authorization code provided' },
         { status: 400 }
@@ -27,14 +27,14 @@ export async function GET(request: Request) {
     }
 
     if (!client_id || !client_secret) {
-      console.error('Missing credentials:', { hasClientId: !!client_id, hasClientSecret: !!client_secret });
+
       return NextResponse.json(
         { error: 'Missing Spotify credentials' },
         { status: 500 }
       );
     }
 
-    console.log('Exchanging code for tokens...');
+
     const basic = Buffer.from(`${client_id}:${client_secret}`).toString('base64');
     const response = await fetch('https://accounts.spotify.com/api/token', {
       method: 'POST',
@@ -63,7 +63,7 @@ export async function GET(request: Request) {
       );
     }
 
-    console.log('Successfully obtained tokens');
+
 
     return NextResponse.json({
       message: 'Successfully obtained tokens',
