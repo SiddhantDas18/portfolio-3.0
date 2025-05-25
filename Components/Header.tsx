@@ -22,7 +22,7 @@ export default function Navbar() {
             `}</style>
 
             <div className="bg-black text-white flex justify-center items-center py-0.5 gap-2">
-                <a href="https://drive.google.com/file/d/17zpOqSsjTtILqCfhuJyjjGuaqaxCRPPk/view?usp=sharing" target="blank"><p>Hire Me</p></a>
+                <a href="https://drive.google.com/file/d/1-YdkLwokXHOLooem9WkFWEMXd9xUYNfY/view?usp=sharing" target="blank"><p>Hire Me</p></a>
                 
                 <ArrowRight className="h-6 w-6 rounded-4xl" />
             </div>
