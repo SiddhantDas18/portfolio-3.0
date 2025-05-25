@@ -3,6 +3,7 @@ import TypingEffect from "@/Components/TypingEffect";
 import HeroElement from "@/Sections/Hero";
 import Projects from "@/Sections/Projects";
 import SpotifyTopTracks from '@/Components/SpotifyTopTracks';
+import Experience from "@/Sections/Experience";
 
 
 export default function Home() {
@@ -10,8 +11,11 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center">
       <div className="w-full max-w-[1400px] px-3 sm:px-4 md:px-6 lg:px-8">
         <HeroElement/>
+        <Experience/>
         <Projects/>
       </div>
+
+      
       
       {/* TypingEffect outside the container to take full width */}
       <div className="w-full">
