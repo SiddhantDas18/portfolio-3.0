@@ -59,7 +59,7 @@ export default function HeroElement() {
 
                 <div className="pt-4 flex flex-col gap-3">
                     <h2 className="text-xl font-bold">About</h2>
-                    <h2 className="opacity-70">I am a Backend and a Frontend Developer. Trying to make a space of mine</h2>
+                    <h2 className="opacity-70">I am a Full Stack Developer. Trying to make a space of mine</h2>
                     <h2 className="opacity-70">2024 CS graduate</h2>
                 </div>
 
