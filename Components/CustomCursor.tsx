@@ -62,12 +62,19 @@ export default function CustomCursor() {
             }
         };
 
-        const handleMouseOut = (e: MouseEvent) => {
-            const related = e.relatedTarget as HTMLElement;
-            if (related && related.closest('[data-hide-cursor="true"]')) {
-                return;
-            }
+        const handleMouseLeave = () => {
+            setIsVisible(false);
             setIsHovered(false);
+        };
+
+        const handleMouseOut = (e: MouseEvent) => {
+            if (!e.relatedTarget) {
+                setIsVisible(false);
+                setIsHovered(false);
+            }
+        };
+
+        const handleMouseEnter = () => {
             if (window.matchMedia('(pointer: fine)').matches) {
                 setIsVisible(true);
             }
@@ -75,13 +82,17 @@ export default function CustomCursor() {
 
         window.addEventListener('mousemove', moveCursor);
         window.addEventListener('mouseover', handleMouseOver);
-        window.addEventListener('mouseout', handleMouseOut);
+        document.addEventListener('mouseleave', handleMouseLeave);
+        document.addEventListener('mouseout', handleMouseOut);
+        document.addEventListener('mouseenter', handleMouseEnter);
 
         return () => {
             mediaQuery.removeEventListener('change', handleMediaChange);
             window.removeEventListener('mousemove', moveCursor);
             window.removeEventListener('mouseover', handleMouseOver);
-            window.removeEventListener('mouseout', handleMouseOut);
+            document.removeEventListener('mouseleave', handleMouseLeave);
+            document.removeEventListener('mouseout', handleMouseOut);
+            document.removeEventListener('mouseenter', handleMouseEnter);
         };
     }, [cursorX, cursorY]);
 
