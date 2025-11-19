@@ -39,7 +39,10 @@ export default function CustomCursor() {
                 setIsVisible(false); // Hide cursor
                 return;
             } else {
-                setIsVisible(true);
+                // Re-check media query before showing
+                if (window.matchMedia('(pointer: fine)').matches) {
+                    setIsVisible(true);
+                }
             }
 
             if (
@@ -65,7 +68,9 @@ export default function CustomCursor() {
                 return;
             }
             setIsHovered(false);
-            setIsVisible(true);
+            if (window.matchMedia('(pointer: fine)').matches) {
+                setIsVisible(true);
+            }
         };
 
         window.addEventListener('mousemove', moveCursor);
@@ -80,7 +85,7 @@ export default function CustomCursor() {
         };
     }, [cursorX, cursorY]);
 
-    if (!isVisible && window.matchMedia('(pointer: fine)').matches === false) return null;
+    if (!isVisible) return null;
 
     return (
         <motion.div
