@@ -6,27 +6,30 @@ import SpotifyTopTracks from '@/Components/SpotifyTopTracks';
 import Experience from "@/Sections/Experience";
 
 
+import Skills from "@/Sections/Skills";
+
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center">
       <div className="w-full max-w-[1400px] px-3 sm:px-4 md:px-6 lg:px-8">
-        <HeroElement/>
-        <Experience/>
-        <Projects/>
+        <HeroElement />
+        <Skills />
+        <Experience />
+        <Projects />
       </div>
 
-      
-      
+
+
       {/* TypingEffect outside the container to take full width */}
       <div className="w-full">
-        <TypingEffect/>
+        <TypingEffect />
       </div>
-      
+
 
       <div className="w-full max-w-[1400px] px-3 sm:px-4 md:px-6 lg:px-8 mt-8">
-        <SpotifyNowPlaying/>
+        <SpotifyNowPlaying />
       </div>
-      
+
 
       <div className="w-full max-w-[1400px] px-3 sm:px-4 md:px-6 lg:px-8 mt-8">
         <div className="flex justify-center">

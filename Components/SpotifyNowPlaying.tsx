@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import { FaSpotify } from 'react-icons/fa';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'motion/react';
+import Image from 'next/image';
 
 interface NowPlaying {
   isPlaying: boolean;
@@ -22,165 +23,87 @@ interface NowPlaying {
 
 export default function SpotifyNowPlaying() {
   const [nowPlaying, setNowPlaying] = useState<NowPlaying | null>(null);
-  const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchNowPlaying = async () => {
       try {
-        setIsLoading(true);
-        console.log('Fetching now playing data...');
-        
-        const response = await fetch('/api/spotify', {
-          method: 'GET',
-          headers: {
-            'Cache-Control': 'no-cache',
-            'Pragma': 'no-cache'
-          }
-        });
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+        const response = await fetch('/api/spotify');
+        if (response.ok) {
+          const data = await response.json();
+          if (!data.error) setNowPlaying(data);
         }
-
-        const data = await response.json();
-        console.log('Now playing response data:', data);
-
-        if (data.error) {
-          console.error('Error in now playing data:', data.error);
-          setError(data.error);
-          setNowPlaying(null);
-          return;
-        }
-
-        // Log the state before updating
-        console.log('Current state before update:', {
-          nowPlaying,
-          error,
-          isLoading
-        });
-
-        setNowPlaying(data);
-        setError(null);
-
-        // Log the state after updating
-        console.log('State after update:', {
-          isPlaying: data.isPlaying,
-          hasItem: !!data.item,
-          itemName: data.item?.name,
-          artists: data.item?.artists
-        });
-
       } catch (err) {
         console.error('Failed to fetch Spotify data:', err);
-        setError(err instanceof Error ? err.message : 'Failed to fetch Spotify data');
-        setNowPlaying(null);
       } finally {
         setIsLoading(false);
       }
     };
 
     fetchNowPlaying();
-    const interval = setInterval(fetchNowPlaying, 10000); // Update every 10 seconds
-
+    const interval = setInterval(fetchNowPlaying, 10000);
     return () => clearInterval(interval);
   }, []);
 
-  // Log render state
-  console.log('Render state:', {
-    isLoading,
-    hasError: !!error,
-    hasNowPlaying: !!nowPlaying,
-    isPlaying: nowPlaying?.isPlaying,
-    hasItem: !!nowPlaying?.item
-  });
-
-  if (isLoading) {
-    return (
-      <section className="py-10 px-10 md:px-40">
-        <div>
-          <p className="bg-grad">Now Playing</p>
-          <div className="pt-5">
-            <div className="flex items-center justify-center p-4 bg-gray-50 dark:bg-gray-800 rounded-lg animate-pulse">
-              <FaSpotify className="w-5 h-5 text-gray-400 mr-2" />
-              <span className="text-gray-400">Loading...</span>
-            </div>
-          </div>
-        </div>
-      </section>
-    );
-  }
+  if (isLoading || !nowPlaying?.isPlaying) return null;
 
   return (
-    <section className="py-10 px-10 md:px-40">
-      <div>
-        <p className="bg-grad">Now Playing</p>
-        <div className="pt-5">
-          {error ? (
-            <div className="flex items-center justify-center p-4 bg-red-50 dark:bg-red-900/20 rounded-lg">
-              <FaSpotify className="w-5 h-5 text-red-500 mr-2" />
-              <span className="text-red-500">{error}</span>
+    <section className="py-10 px-6 md:px-20 max-w-5xl mx-auto">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="flex items-center justify-between p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm bw-hover"
+      >
+        <div className="flex items-center gap-4">
+          <div className="relative w-12 h-12 rounded-lg overflow-hidden">
+            {nowPlaying.item?.album.images[0] && (
+              <Image
+                src={nowPlaying.item.album.images[0].url}
+                alt={nowPlaying.item.album.name}
+                fill
+                className="object-cover animate-[spin_10s_linear_infinite]"
+              />
+            )}
+          </div>
+          <div>
+            <div className="flex items-center gap-2 mb-1">
+              <FaSpotify className="w-4 h-4 text-[#1DB954]" />
+              <span className="text-xs font-medium text-[#1DB954] uppercase tracking-wider">Now Playing</span>
             </div>
-          ) : !nowPlaying?.isPlaying ? (
-            <div className="flex items-center justify-center p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
-              <FaSpotify className="w-5 h-5 text-gray-400 mr-2" />
-              <span className="text-gray-400">Not playing anything right now</span>
-            </div>
-          ) : (
-            <AnimatePresence>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                className="relative group"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-green-500/20 to-purple-500/20 rounded-lg blur-xl group-hover:blur-2xl transition-all duration-300" />
-                <div className="relative flex items-center space-x-4 p-4 bg-white/10 dark:bg-gray-800/50 backdrop-blur-sm rounded-lg border border-gray-200/20 dark:border-gray-700/50 hover:border-green-500/50 dark:hover:border-green-500/50 transition-all duration-300">
-                  {nowPlaying.item?.album.images[0] && (
-                    <motion.img
-                      initial={{ scale: 0.8, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      transition={{ duration: 0.3 }}
-                      src={nowPlaying.item.album.images[0].url}
-                      alt={nowPlaying.item.album.name}
-                      className="w-16 h-16 rounded-lg shadow-lg"
-                    />
-                  )}
-                  <div className="flex-1 min-w-0">
-                    <a
-                      href={nowPlaying.item?.external_urls.spotify}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="block hover:opacity-80 transition-opacity"
-                    >
-                      <div className="flex items-center space-x-2">
-                        <FaSpotify className="w-4 h-4 text-green-500" />
-                        <span className="text-sm text-green-500 font-medium">Now Playing</span>
-                      </div>
-                      <h3 className="font-bold text-gray-900 dark:text-white truncate">
-                        {nowPlaying.item?.name}
-                      </h3>
-                      <p className="text-gray-600 dark:text-gray-300 truncate">
-                        {nowPlaying.item?.artists}
-                      </p>
-                      <p className="text-sm text-gray-500 dark:text-gray-400 truncate">
-                        {nowPlaying.item?.album.name}
-                      </p>
-                    </a>
-                  </div>
-                  <div className="flex items-center">
-                    <div className="flex space-x-1">
-                      <div className="w-1 h-3 bg-green-500 rounded-full animate-[music_1s_ease-in-out_infinite]" />
-                      <div className="w-1 h-3 bg-green-500 rounded-full animate-[music_1s_ease-in-out_infinite_0.2s]" />
-                      <div className="w-1 h-3 bg-green-500 rounded-full animate-[music_1s_ease-in-out_infinite_0.4s]" />
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          )}
+            <a
+              href={nowPlaying.item?.external_urls.spotify}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block group"
+            >
+              <h3 className="text-sm font-medium text-white group-hover:underline decoration-white/30 underline-offset-2">
+                {nowPlaying.item?.name}
+              </h3>
+              <p className="text-xs text-white/50">
+                {nowPlaying.item?.artists}
+              </p>
+            </a>
+          </div>
         </div>
-      </div>
+
+        <div className="flex gap-1 items-end h-4">
+          {[...Array(3)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="w-1 bg-[#1DB954] rounded-full"
+              animate={{
+                height: ["20%", "100%", "20%"],
+              }}
+              transition={{
+                duration: 0.8,
+                repeat: Infinity,
+                delay: i * 0.2,
+                ease: "easeInOut"
+              }}
+            />
+          ))}
+        </div>
+      </motion.div>
     </section>
   );
 } 

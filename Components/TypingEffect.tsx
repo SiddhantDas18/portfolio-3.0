@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'motion/react';
 
 const TypingEffect: React.FC = () => {
     const phrases = [
@@ -44,27 +44,15 @@ const TypingEffect: React.FC = () => {
 
     const { scrollY } = useScroll();
 
-    // Updated width transforms to use viewport width
-    const width = useTransform(scrollY, 
-        [0, 300], 
+    const width = useTransform(scrollY,
+        [0, 300],
         ['100vw', 'calc(100vw - 2rem)']
     );
 
-    const borderRadius = useTransform(scrollY, 
-        [0, 300], 
+    const borderRadius = useTransform(scrollY,
+        [0, 300],
         ['0rem', '1.5rem']
     );
-
-    // Detect screen width
-    const [isMobile, setIsMobile] = useState(false);
-    useEffect(() => {
-        const handleResize = () => {
-            setIsMobile(window.innerWidth < 768);
-        };
-        handleResize();
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
 
     return (
         <motion.div
@@ -73,28 +61,14 @@ const TypingEffect: React.FC = () => {
                 borderRadius,
                 margin: '0 auto',
             }}
-            className="h-screen flex items-center justify-center bg-gradient-to-tr from-red-500 via-purple-500 to-yellow-400 transition-all duration-1000 overflow-hidden relative"
+            className="h-[50vh] flex items-center justify-center bg-white/5 border border-white/10 backdrop-blur-sm transition-all duration-1000 overflow-hidden relative my-20"
         >
-            <div className="absolute inset-0 bg-white/30 dark:bg-black/30 backdrop-blur-sm z-0" />
-
             <div className="z-10 text-center px-4">
-                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 dark:text-white">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white">
                     {text}
-                    <span className="ml-1 border-r-2 border-black dark:border-white animate-pulse" />
+                    <span className="ml-1 border-r-2 border-white animate-pulse" />
                 </h1>
             </div>
-
-            <style jsx>{`
-                @keyframes gradientFade {
-                    0% { background-position: 0% 50%; }
-                    50% { background-position: 100% 50%; }
-                    100% { background-position: 0% 50%; }
-                }
-                .animate-gradient-fade {
-                    background-size: 300% 300%;
-                    animation: gradientFade 15s ease infinite;
-                }
-            `}</style>
         </motion.div>
     );
 };

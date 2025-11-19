@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import { FaSpotify } from 'react-icons/fa';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
+import Image from 'next/image';
 
 interface Track {
   name: string;
@@ -16,29 +17,20 @@ interface Track {
   };
 }
 
-interface TopTracksResponse {
-  tracks: Track[];
-}
-
 export default function SpotifyTopTracks() {
   const [tracks, setTracks] = useState<Track[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchTopTracks = async () => {
       try {
         const response = await fetch('/api/spotify?type=top-tracks');
-        const data = await response.json();
-        
-        if (!response.ok) {
-          throw new Error(data.error?.message || data.details || 'Failed to fetch top tracks');
+        if (response.ok) {
+          const data = await response.json();
+          setTracks(data.tracks);
         }
-
-        setTracks(data.tracks);
       } catch (err) {
         console.error('Error fetching top tracks:', err);
-        setError(err instanceof Error ? err.message : 'Failed to load top tracks');
       } finally {
         setIsLoading(false);
       }
@@ -47,58 +39,44 @@ export default function SpotifyTopTracks() {
     fetchTopTracks();
   }, []);
 
-  if (isLoading) {
-    return (
-      <div className="flex items-center justify-center p-4 bg-[#1DB954]/10 rounded-lg">
-        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-[#1DB954]"></div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="p-4 bg-red-500/10 rounded-lg text-red-500">
-        <p>Error: {error}</p>
-      </div>
-    );
-  }
+  if (isLoading) return null;
 
   return (
-    <div className="bg-[#1DB954]/5 rounded-xl p-4 sm:p-6">
-      <div className="flex items-center gap-2 text-[#1DB954] mb-4">
-        <FaSpotify className="text-2xl" />
-        <h2 className="text-xl font-bold">My Top Tracks</h2>
+    <div className="w-full">
+      <div className="flex items-center gap-2 mb-6 opacity-60">
+        <FaSpotify className="text-xl" />
+        <h2 className="text-lg font-medium">Top Tracks</h2>
       </div>
-      
-      <div className="space-y-3 max-h-[500px] overflow-y-auto pr-2 custom-scrollbar">
-        {tracks.map((track, index) => (
+
+      <div className="grid grid-cols-1 gap-2">
+        {tracks.slice(0, 5).map((track, index) => (
           <motion.a
             key={track.name}
             href={track.external_urls.spotify}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-3 p-3 bg-[#1DB954]/5 hover:bg-[#1DB954]/10 rounded-lg transition-colors"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 }}
+            className="flex items-center gap-4 p-3 rounded-xl hover:bg-white/5 transition-colors group bw-hover"
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: index * 0.05 }}
           >
-            <div className="relative w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0">
+            <span className="text-white/20 font-mono text-sm w-4 text-right group-hover:text-white/40 transition-colors">{index + 1}</span>
+
+            <div className="relative w-10 h-10 rounded overflow-hidden flex-shrink-0 transition-all duration-500">
               {track.album.images[0] && (
-                <img
+                <Image
                   src={track.album.images[0].url}
                   alt={track.album.name}
-                  className="w-full h-full object-cover rounded"
+                  fill
+                  className="object-cover"
                 />
               )}
-              <div className="absolute inset-0 flex items-center justify-center bg-black/50 rounded opacity-0 hover:opacity-100 transition-opacity">
-                <FaSpotify className="text-[#1DB954] text-lg sm:text-xl" />
-              </div>
             </div>
-            
+
             <div className="flex-1 min-w-0">
-              <h3 className="font-medium truncate text-sm sm:text-base">{track.name}</h3>
-              <p className="text-xs sm:text-sm text-gray-500 truncate">{track.artists}</p>
-              <p className="text-xs text-gray-400 truncate">{track.album.name}</p>
+              <h3 className="text-sm font-medium text-white/90 truncate group-hover:text-white transition-colors">{track.name}</h3>
+              <p className="text-xs text-white/50 truncate group-hover:text-white/70 transition-colors">{track.artists}</p>
             </div>
           </motion.a>
         ))}

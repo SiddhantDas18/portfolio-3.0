@@ -4,173 +4,82 @@ import SiddhantImge from '@/Assets/Siddhant_beta.jpg'
 import { motion } from "motion/react"
 import Xlogo from '@/Assets/logo-white.png'
 import LinktreeLogo from '@/Assets/linktree-white-icon.png'
-import ReactLogo from '@/Assets/reactlogo.png'
-import JavascriptLogo from '@/Assets/JavaScript-logo.png'
-import Typescriptlogo from '@/Assets/ts-logo-128.png'
-import NextJs from "@/Assets/icons8-nextjs-48.png"
-import Docker from "@/Assets/docker-mark-blue.png"
-import Git from "@/Assets/git.png"
-import Express from "@/Assets/exjs.png"
-import Prisma from "@/Assets/prisma.png"
 import Github from '@/Assets/github-white-icon.png'
-import Adonis from "@/Assets/adonis.png"
+import Magnetic from "@/Components/Magnetic"
 
 export default function HeroElement() {
-    return <section className="my-10 pt-20 px-10 md:px-40" id="hero">
-        <div className="">
-            <div className="flex justify-between">
-                <motion.div whileHover={{ scale: 1.2 }}>
-                    <Image
-                        src={SiddhantImge}
-                        alt="Siddhant"
-                        className="rounded-2xl h-[120px] w-[120px] md:h-[160px] md:w-[160px] lg:h-[160px] lg:w-[160px]"
-                    />
-                </motion.div>
+    return (
+        <section className="min-h-[80vh] flex flex-col justify-center px-6 md:px-20 max-w-5xl mx-auto pt-20" id="hero">
+            <div className="flex flex-col md:flex-row gap-10 md:gap-20 items-center md:items-start">
+                {/* Profile Image */}
+                <Magnetic>
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.5 }}
+                        className="relative group"
+                        data-hide-cursor="true"
+                    >
+                        <div className="absolute -inset-1 bg-gradient-to-r from-white/20 to-white/10 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-500"></div>
+                        <Image
+                            src={SiddhantImge}
+                            alt="Siddhant"
+                            className="relative rounded-2xl h-[160px] w-[160px] md:h-[200px] md:w-[200px] object-cover shadow-2xl bw-hover"
+                            priority
+                        />
+                    </motion.div>
+                </Magnetic>
 
-                <div>
-                    <div className="flex gap-3 items-start justify-end">
-                        <motion.div whileHover={{ scale: 1.5 }}>
-                            <a href="https://x.com/siddhantspacee" target="blank">
-                                <Image src={Xlogo} alt="X logo" width={25} height={25} className="w-[25px] h-[25px]" />
-                            </a>
-                        </motion.div>
+                {/* Content */}
+                <div className="flex-1 text-center md:text-left space-y-6">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.2 }}
+                    >
+                        <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-4">
+                            Siddhant Das
+                        </h1>
+                        <h2 className="text-xl md:text-2xl text-white/60 font-light">
+                            Full Stack Developer
+                        </h2>
+                    </motion.div>
 
-                        <motion.div whileHover={{ scale: 1.5 }}>
-                            <a href="https://linktr.ee/siddhant05" target="blank">
-                                <Image src={LinktreeLogo} alt="Linktree logo" width={25} height={25} className="w-[25px] h-[25px]" />
-                            </a>
-                        </motion.div>
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.3 }}
+                        className="space-y-2 text-white/80 max-w-lg mx-auto md:mx-0 leading-relaxed"
+                    >
+                        <p>Building digital experiences with a focus on minimalism and performance.</p>
+                        <p className="text-sm text-white/50">2024 CS Graduate • Kolkata, India</p>
+                    </motion.div>
 
-                        <motion.div whileHover={{ scale: 1.5 }}>
-                            <a href="https://github.com/siddhantdas18" target="blank">
-                                <Image src={Github} alt="Github logo" width={25} height={25} className="w-[25px] h-[25px]" />
-                            </a>
-                        </motion.div>
-                    </div>
-
-                    <div className="pt-5 opacity-60">
-                        <div className="md:hidden"><h2>23 | M Kolkata<br />India</h2></div>
-                        <div className="hidden md:block"><h2>23 | M Kolkata India</h2></div>
-                    </div>
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.4 }}
+                        className="flex gap-6 justify-center md:justify-start pt-4"
+                    >
+                        <SocialLink href="https://github.com/siddhantdas18" icon={Github} alt="Github" />
+                        <SocialLink href="https://x.com/siddhantspacee" icon={Xlogo} alt="X" />
+                        <SocialLink href="https://linktr.ee/siddhant05" icon={LinktreeLogo} alt="Linktree" />
+                    </motion.div>
                 </div>
             </div>
+        </section>
+    )
+}
 
-            <div className="pt-5">
-                <h1 className="text-3xl">I'm Siddhant Das</h1>
-
-                <div className="pt-4 flex flex-col gap-3">
-                    <h2 className="text-xl font-bold">About</h2>
-                    <h2 className="opacity-70">I am a Full Stack Developer. Trying to make a space of mine</h2>
-                    <h2 className="opacity-70">2024 CS graduate</h2>
-                </div>
-
-                <div className="pt-4">
-                    <h2 className="text-xl font-bold">Skills</h2>
-                    <div className="pt-5">
-                        <div className="flex flex-wrap justify-center gap-4 md:gap-6">
-                            <motion.div
-                                whileHover={{ scale: 1.08 }}
-                                className="relative h-12 w-36 md:w-44"
-                            >
-                                <div className="absolute top-2 left-1.5 h-12 w-full bg-yellow-100 text-black shadow-md rounded-md"></div>
-                                <div className="absolute top-0 left-0 h-12 w-full bg-[#1e1f2c] text-center text-white border-yellow-300/60 border-t border-l shadow-xl rounded-md flex items-center justify-center font-bold gap-1">
-                                    <Image src={JavascriptLogo} alt="JavascriptLogo" className="h-7 w-7 rounded-md" />
-                                    JavaScript
-                                </div>
-                            </motion.div>
-
-                            <motion.div
-                                whileHover={{ scale: 1.08 }}
-                                className="relative h-12 w-36 md:w-44"
-                            >
-                                <div className="absolute top-2 left-1.5 h-12 w-full bg-blue-300 text-black shadow-md rounded-md"></div>
-                                <div className="absolute top-0 left-0 h-12 w-full bg-[#1e1f2c] text-center text-white border-blue-300/60 border-t border-l shadow-xl rounded-md flex items-center justify-center font-bold gap-1">
-                                    <Image src={Typescriptlogo} alt="Typescriptlogo" className="h-7 w-7 rounded-md" />
-                                    TypeScript
-                                </div>
-                            </motion.div>
-
-                            <motion.div
-                                whileHover={{ scale: 1.08 }}
-                                whileDrag={{}}
-                                className="relative h-12 w-36 md:w-44"
-                            >
-                                <div className="absolute top-2 left-1.5 h-12 w-full bg-[#03dbfd] text-black shadow-md rounded-md"></div>
-                                <div className="absolute top-0 left-0 h-12 w-full bg-[#1e1f2c] text-center text-white border-blue-300/60 border-t border-l shadow-xl rounded-md flex items-center justify-center font-bold gap-1">
-                                    <Image src={ReactLogo} alt="ReactLogo" className="h-7 w-7 rounded-md" />
-                                    React
-                                </div>
-                            </motion.div>
-
-                            <motion.div
-                                whileHover={{ scale: 1.08 }}
-                                className="relative h-12 w-36 md:w-44"
-                            >
-                                <div className="absolute top-2 left-1.5 h-12 w-full bg-white text-black shadow-md rounded-md"></div>
-                                <div className="absolute top-0 left-0 h-12 w-full bg-[#1e1f2c] text-center text-white border-white/60 border-t border-l shadow-xl rounded-md flex items-center justify-center font-bold gap-1">
-                                    <Image src={NextJs} alt="NextJs" className="h-7 w-7 rounded-md" />
-                                    Next.js
-                                </div>
-                            </motion.div>
-
-                            <motion.div
-                                whileHover={{ scale: 1.08 }}
-                                className="relative h-12 w-36 md:w-44"
-                            >
-                                <div className="absolute top-2 left-1.5 h-12 w-full bg-blue-600 text-black shadow-md rounded-md"></div>
-                                <div className="absolute top-0 left-0 h-12 w-full bg-[#1e1f2c] text-center text-white border-blue-600/60 border-t border-l shadow-xl rounded-md flex items-center justify-center font-bold gap-1">
-                                    <Image src={Docker} alt="Docker" className="h-7 w-7 rounded-md" />
-                                    Docker
-                                </div>
-                            </motion.div>
-
-                            <motion.div
-                                whileHover={{ scale: 1.08 }}
-                                className="relative h-12 w-36 md:w-44"
-                            >
-                                <div className="absolute top-2 left-1.5 h-12 w-full bg-[#17a394] text-black shadow-md rounded-md"></div>
-                                <div className="absolute top-0 left-0 h-12 w-full bg-[#1e1f2c] text-center text-white border-green-300/30 border-t border-l shadow-xl rounded-md flex items-center justify-center font-bold gap-1">
-                                    <Image src={Prisma} alt="Prisma" className="h-7 w-7 rounded-md" />
-                                    Prisma
-                                </div>
-                            </motion.div>
-
-                            <motion.div
-                                whileHover={{ scale: 1.08 }}
-                                className="relative h-12 w-36 md:w-44"
-                            >
-                                <div className="absolute top-2 left-1.5 h-12 w-full bg-red-300 text-black shadow-md rounded-md"></div>
-                                <div className="absolute top-0 left-0 h-12 w-full bg-[#1e1f2c] text-center text-white border-red-300/60 border-t border-l shadow-xl rounded-md flex items-center justify-center font-bold gap-1">
-                                    <Image src={Git} alt="Git" className="h-7 w-7 rounded-md" />
-                                    Git
-                                </div>
-                            </motion.div>
-
-                            <motion.div
-                                whileHover={{ scale: 1.08 }}
-                                className="relative h-12 w-36 md:w-44"
-                            >
-                                <div className="absolute top-2 left-1.5 h-12 w-full bg-white text-black shadow-md rounded-md"></div>
-                                <div className="absolute top-0 left-0 h-12 w-full bg-[#1e1f2c] text-center text-white border-white/70 border-t border-l shadow-xl rounded-md flex items-center justify-center font-bold gap-1">
-                                    <Image src={Express} alt="Express" className="h-7 w-7 rounded-md" />
-                                    Express
-                                </div>
-                            </motion.div>
-
-                            <motion.div
-                                whileHover={{ scale: 1.08 }}
-                                className="relative h-12 w-36 md:w-44"
-                            >
-                                <div className="absolute top-2 left-1.5 h-12 w-full bg-purple-400 text-black shadow-md rounded-md"></div>
-                                <div className="absolute top-0 left-0 h-12 w-full bg-[#1e1f2c] text-center text-white border-purple-400/60 border-t border-l shadow-xl rounded-md flex items-center justify-center font-bold gap-1">
-                                    <Image src={Adonis} alt="Adonis" className="h-7 w-7 rounded-md" />
-                                    Adonis JS
-                                </div>
-                            </motion.div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+function SocialLink({ href, icon, alt }: { href: string, icon: any, alt: string }) {
+    return (
+        <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="opacity-70 hover:opacity-100 transition-opacity duration-300 hover:scale-110 transform"
+        >
+            <Image src={icon} alt={alt} width={24} height={24} className="w-6 h-6" />
+        </a>
+    )
 }

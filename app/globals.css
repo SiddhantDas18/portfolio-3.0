@@ -1,57 +1,75 @@
 @import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
 
-@layer components{
-  .btn{
-    @apply bg-white py-2 px-2 rounded-md font-medium items-center inline-flex justify-center tracking-tighter
+@theme {
+  --color-background: #0a0a0a;
+  --color-foreground: #ededed;
+  --color-muted: #262626;
+  --color-accent: #333333;
+  --font-sans: 'Space Grotesk', sans-serif;
+}
+
+@layer base {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
   }
 
-  .bg-grad{
-    @apply  bg-gradient-to-r from-black to-[#001E80] text-transparent bg-clip-text  md:text-[54px] md:leading-[60px] text-4xl font-bold tracking-tighter 
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  @media (pointer: fine) {
+    body {
+      cursor: none;
+    }
+
+    a,
+    button,
+    [role="button"] {
+      cursor: none;
+    }
   }
 }
 
-/* Force black text in buttons */
-button.btn,
-.btn button {
-  color: black !important;
+@layer components {
+  .btn {
+    @apply bg-foreground text-background px-4 py-2 rounded-full font-medium inline-flex items-center justify-center transition-transform hover:scale-105 active:scale-95;
+  }
 }
 
-:root {
-  --background:  #171717;
-  --foreground: #ffffff;
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: 'Space Grotesk', sans-serif;
-}
-
-* {
-  color: white;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-/* Custom Scrollbar Styles */
-.custom-scrollbar::-webkit-scrollbar {
+/* Custom Scrollbar */
+::-webkit-scrollbar {
   width: 6px;
 }
 
-.custom-scrollbar::-webkit-scrollbar-track {
-  background: rgba(29, 185, 84, 0.1);
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
   border-radius: 3px;
 }
 
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(29, 185, 84, 0.3);
-  border-radius: 3px;
+:: -webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: rgba(29, 185, 84, 0.5);
-}
+@layer utilities {
+  .bw-hover {
+    filter: grayscale(100%);
+    transition: filter 0.5s ease;
+  }
 
+  @media (hover: hover) {
+    .bw-hover:hover {
+      filter: grayscale(0%);
+    }
+  }
+}
