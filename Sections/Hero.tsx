@@ -13,6 +13,7 @@ import Git from "@/Assets/git.png"
 import Express from "@/Assets/exjs.png"
 import Prisma from "@/Assets/prisma.png"
 import Github from '@/Assets/github-white-icon.png'
+import Adonis from "@/Assets/adonis.png"
 
 export default function HeroElement() {
     return <section className="my-10 pt-20 px-10 md:px-40" id="hero">
@@ -66,10 +67,10 @@ export default function HeroElement() {
                 <div className="pt-4">
                     <h2 className="text-xl font-bold">Skills</h2>
                     <div className="pt-5">
-                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6 gap-y-8">
+                        <div className="flex flex-wrap justify-center gap-4 md:gap-6">
                             <motion.div
                                 whileHover={{ scale: 1.08 }}
-                                className="relative h-12 w-full"
+                                className="relative h-12 w-36 md:w-44"
                             >
                                 <div className="absolute top-2 left-1.5 h-12 w-full bg-yellow-100 text-black shadow-md rounded-md"></div>
                                 <div className="absolute top-0 left-0 h-12 w-full bg-[#1e1f2c] text-center text-white border-yellow-300/60 border-t border-l shadow-xl rounded-md flex items-center justify-center font-bold gap-1">
@@ -80,7 +81,7 @@ export default function HeroElement() {
 
                             <motion.div
                                 whileHover={{ scale: 1.08 }}
-                                className="relative h-12 w-full"
+                                className="relative h-12 w-36 md:w-44"
                             >
                                 <div className="absolute top-2 left-1.5 h-12 w-full bg-blue-300 text-black shadow-md rounded-md"></div>
                                 <div className="absolute top-0 left-0 h-12 w-full bg-[#1e1f2c] text-center text-white border-blue-300/60 border-t border-l shadow-xl rounded-md flex items-center justify-center font-bold gap-1">
@@ -92,7 +93,7 @@ export default function HeroElement() {
                             <motion.div
                                 whileHover={{ scale: 1.08 }}
                                 whileDrag={{}}
-                                className="relative h-12 w-full"
+                                className="relative h-12 w-36 md:w-44"
                             >
                                 <div className="absolute top-2 left-1.5 h-12 w-full bg-[#03dbfd] text-black shadow-md rounded-md"></div>
                                 <div className="absolute top-0 left-0 h-12 w-full bg-[#1e1f2c] text-center text-white border-blue-300/60 border-t border-l shadow-xl rounded-md flex items-center justify-center font-bold gap-1">
@@ -103,7 +104,7 @@ export default function HeroElement() {
 
                             <motion.div
                                 whileHover={{ scale: 1.08 }}
-                                className="relative h-12 w-full"
+                                className="relative h-12 w-36 md:w-44"
                             >
                                 <div className="absolute top-2 left-1.5 h-12 w-full bg-white text-black shadow-md rounded-md"></div>
                                 <div className="absolute top-0 left-0 h-12 w-full bg-[#1e1f2c] text-center text-white border-white/60 border-t border-l shadow-xl rounded-md flex items-center justify-center font-bold gap-1">
@@ -114,7 +115,7 @@ export default function HeroElement() {
 
                             <motion.div
                                 whileHover={{ scale: 1.08 }}
-                                className="relative h-12 w-full"
+                                className="relative h-12 w-36 md:w-44"
                             >
                                 <div className="absolute top-2 left-1.5 h-12 w-full bg-blue-600 text-black shadow-md rounded-md"></div>
                                 <div className="absolute top-0 left-0 h-12 w-full bg-[#1e1f2c] text-center text-white border-blue-600/60 border-t border-l shadow-xl rounded-md flex items-center justify-center font-bold gap-1">
@@ -125,7 +126,7 @@ export default function HeroElement() {
 
                             <motion.div
                                 whileHover={{ scale: 1.08 }}
-                                className="relative h-12 w-full"
+                                className="relative h-12 w-36 md:w-44"
                             >
                                 <div className="absolute top-2 left-1.5 h-12 w-full bg-[#17a394] text-black shadow-md rounded-md"></div>
                                 <div className="absolute top-0 left-0 h-12 w-full bg-[#1e1f2c] text-center text-white border-green-300/30 border-t border-l shadow-xl rounded-md flex items-center justify-center font-bold gap-1">
@@ -136,7 +137,7 @@ export default function HeroElement() {
 
                             <motion.div
                                 whileHover={{ scale: 1.08 }}
-                                className="relative h-12 w-full"
+                                className="relative h-12 w-36 md:w-44"
                             >
                                 <div className="absolute top-2 left-1.5 h-12 w-full bg-red-300 text-black shadow-md rounded-md"></div>
                                 <div className="absolute top-0 left-0 h-12 w-full bg-[#1e1f2c] text-center text-white border-red-300/60 border-t border-l shadow-xl rounded-md flex items-center justify-center font-bold gap-1">
@@ -147,12 +148,23 @@ export default function HeroElement() {
 
                             <motion.div
                                 whileHover={{ scale: 1.08 }}
-                                className="relative h-12 w-full"
+                                className="relative h-12 w-36 md:w-44"
                             >
                                 <div className="absolute top-2 left-1.5 h-12 w-full bg-white text-black shadow-md rounded-md"></div>
                                 <div className="absolute top-0 left-0 h-12 w-full bg-[#1e1f2c] text-center text-white border-white/70 border-t border-l shadow-xl rounded-md flex items-center justify-center font-bold gap-1">
                                     <Image src={Express} alt="Express" className="h-7 w-7 rounded-md" />
                                     Express
+                                </div>
+                            </motion.div>
+
+                            <motion.div
+                                whileHover={{ scale: 1.08 }}
+                                className="relative h-12 w-36 md:w-44"
+                            >
+                                <div className="absolute top-2 left-1.5 h-12 w-full bg-purple-400 text-black shadow-md rounded-md"></div>
+                                <div className="absolute top-0 left-0 h-12 w-full bg-[#1e1f2c] text-center text-white border-purple-400/60 border-t border-l shadow-xl rounded-md flex items-center justify-center font-bold gap-1">
+                                    <Image src={Adonis} alt="Adonis" className="h-7 w-7 rounded-md" />
+                                    Adonis JS
                                 </div>
                             </motion.div>
                         </div>
