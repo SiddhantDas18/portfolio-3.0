@@ -4,15 +4,7 @@ const client_id = process.env.SPOTIFY_CLIENT_ID;
 const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
 const refresh_token = process.env.SPOTIFY_REFRESH_TOKEN;
 
-// Validate environment variables
-if (!client_id || !client_secret || !refresh_token) {
-  console.error('Missing Spotify credentials:', {
-    hasClientId: !!client_id,
-    hasClientSecret: !!client_secret,
-    hasRefreshToken: !!refresh_token
-  });
-  throw new Error('Missing required Spotify credentials');
-}
+// Validate environment variables check moved to getAccessToken to prevent build failure
 
 const basic = Buffer.from(`${client_id}:${client_secret}`).toString('base64');
 const TOKEN_ENDPOINT = 'https://accounts.spotify.com/api/token';
@@ -22,6 +14,11 @@ const SEARCH_ENDPOINT = 'https://api.spotify.com/v1/search';
 
 async function getAccessToken() {
   try {
+    if (!client_id || !client_secret || !refresh_token) {
+      console.warn('Missing Spotify credentials, returning null token');
+      return { access_token: null };
+    }
+
     const params = new URLSearchParams();
     params.append('grant_type', 'refresh_token');
     params.append('refresh_token', refresh_token as string);

@@ -68,16 +68,16 @@ export default function FooterSection() {
                         <div className="flex md:hidden gap-6">
                             <SocialIcon href="https://github.com/siddhantdas18" icon={<FaGithub />} label="GitHub" />
                             <SocialIcon href="https://x.com/siddhantspacee" icon={<FaTwitter />} label="Twitter" />
-                            <SocialIcon href="https://www.linkedin.com/in/siddhant-das-264667232/" icon={<FaLinkedin />} label="LinkedIn" />
-                            <SocialIcon href="https://instagram.com" icon={<FaInstagram />} label="Instagram" />
+                            <SocialIcon href="https://www.linkedin.com/in/siddhantspacee/" icon={<FaLinkedin />} label="LinkedIn" />
+                            <SocialIcon href="https://www.instagram.com/9_em_9/" icon={<FaInstagram />} label="Instagram" />
                         </div>
 
                         {/* Desktop: Vertical List */}
                         <div className="hidden md:flex flex-col gap-3">
                             <SocialLink href="https://github.com/siddhantdas18" label="GitHub" />
                             <SocialLink href="https://x.com/siddhantspacee" label="Twitter / X" />
-                            <SocialLink href="https://www.linkedin.com/in/siddhant-das-264667232/" label="LinkedIn" />
-                            <SocialLink href="https://instagram.com" label="Instagram" />
+                            <SocialLink href="https://www.linkedin.com/in/siddhantspacee/" label="LinkedIn" />
+                            <SocialLink href="https://www.instagram.com/9_em_9/" label="Instagram" />
                         </div>
                     </div>
 
