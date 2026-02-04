@@ -37,6 +37,27 @@ const projects = [
     }
 ]
 
+const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.1
+        }
+    }
+}
+
+const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: {
+            duration: 0.5
+        }
+    }
+}
+
 export default function Projects() {
     return (
         <section className="py-20 px-6 md:px-20 max-w-5xl mx-auto" id="projects">
@@ -50,29 +71,32 @@ export default function Projects() {
                 <p className="text-muted-foreground">Selected works and experiments.</p>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <motion.div
+                className="grid grid-cols-1 md:grid-cols-2 gap-6"
+                variants={containerVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-50px" }}
+            >
                 {projects.map((project, index) => (
                     <motion.a
                         key={index}
                         href={project.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: index * 0.1 }}
-                        className="group p-6 rounded-2xl bg-card border border-card-border hover:bg-muted/50 hover:border-muted-foreground/20 transition-all duration-300"
+                        variants={itemVariants}
+                        className="group p-6 rounded-2xl bg-card border border-card-border hover:bg-muted/50 hover:border-muted-foreground/20 transition-all duration-300 h-full flex flex-col"
                     >
                         <div className="flex justify-between items-start mb-4">
                             <h3 className="text-xl font-semibold text-foreground group-hover:text-foreground transition-colors">{project.title}</h3>
                             <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-foreground group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
                         </div>
 
-                        <p className="text-muted-foreground text-sm mb-6 line-clamp-2 group-hover:text-foreground/80 transition-colors">
+                        <p className="text-muted-foreground text-sm mb-6 line-clamp-2 group-hover:text-foreground/80 transition-colors flex-grow">
                             {project.description}
                         </p>
 
-                        <div className="flex flex-wrap gap-2">
+                        <div className="flex flex-wrap gap-2 mt-auto">
                             {project.tags.map(tag => (
                                 <span key={tag} className="text-xs font-medium px-2.5 py-1 rounded-full bg-muted/50 text-muted-foreground border border-card-border">
                                     {tag}
@@ -81,7 +105,7 @@ export default function Projects() {
                         </div>
                     </motion.a>
                 ))}
-            </div>
+            </motion.div>
         </section>
     )
 }

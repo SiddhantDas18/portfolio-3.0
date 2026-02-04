@@ -6,6 +6,7 @@ import "./globals.css";
 import Navbar from "@/Components/Header";
 import FooterSection from "@/Components/Footer";
 import CustomCursor from "@/Components/CustomCursor";
+import SmoothScroll from "@/Components/SmoothScroll";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -30,6 +31,7 @@ export default function RootLayout({
       <body
         className={`${spaceGrotesk.variable} antialiased`}
       >
+        <SmoothScroll />
         <Navbar />
         <CustomCursor />
         {children}
