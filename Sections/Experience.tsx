@@ -56,7 +56,7 @@ export default function Experience() {
 
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
                         <h3 className="text-xl font-semibold">Full Stack Developer Intern</h3>
-                        <span className="text-sm text-white/40 font-mono">May 2025 - Present</span>
+                        <span className="text-sm text-white/40 font-mono">May 2025 - Dec 2025 | 8 months</span>
                     </div>
 
                     <div className="flex items-center gap-2 mb-4 text-white/70">
